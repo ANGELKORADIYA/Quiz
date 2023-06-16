@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style-type: none;
+
+            /* background-color: black;
+    color: white;    
+    font-size: 30px; */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        body div {
+            color: white;
+        }
+
+        html,
+        body {
+            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        span {
+            background: #1e00ff;
+            color: white;
+            padding: 4px;
+            margin: 5px;
+            border-radius: 12px;
+            font-size: 30px;
+        }
+
+        input,
+        button ,#timer{
+            padding: 12px;
+            margin: 19px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        hr {
+            margin: 25px 100px;
+        }
+
+        /* navbar */
+        nav {
+            background-color: black;
+        }
+
+        nav ul {
+            padding: 3px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            padding: 20px;
+            margin: 18px;
+            color: aqua;
+            border-radius: 12px;
+        }
+
+        nav ul li a:hover {
+
+            background-color: white;
+            color: red;
+        }
+
+        /* box */
+        #divof_CO {
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+
+        }
+
+        #afterCO,
+        #divof_question,
+        #afterquestion,
+        #confirmation {
+            display: none;
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+        }
+
+        #afterquestion p {
+            padding: 12px;
+            margin: 19px;
+        }
+
+        button:active,
+        input:active {
+            background-color: black;
+            color: white;
+        }
+
+        /*  */
+        #loadquestion {
+            margin: 12px;
+            padding: 12px;
+        }
+
+        #question {
+            margin: 40px;
+            padding: 30px;
+        }
+
+        .loadquestion {
+            margin: 20px;
+        }
+
+        textarea {
+            margin: 50px;
+            width: 90%;
+            height: 50px;
+        }
+
+        #confirmation2 {
+            display: none;
+        }
+
+        hr {
+            /* size:12px; */
+            height: 3px;
+            background-color: black;
+            /* size: 122px; */
+        }
+
+        .COindicator {
+            margin: 20px;
+            font-size: 30px;
+            background-color: blue;
+            color: white;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .loadquestion {
+            border-radius: 7px;
+            margin: 30px;
+            background-color: orange;
+            padding: 10px;
+        }
+
+        textarea {
+            text-align: center;
+            padding-top: 12px;
+        }
+
+        /* .discliamer{
+    position: relative;
+    display: none;
+    padding: 12px;
+    left:42%;
+    bottom: 30px;
+    border-radius: 12px;
+    background-color: aliceblue;
+}   
+
+.discliamer::after{
+    position: absolute;
+    content: '^';
+    font-size: 30px;
+    left: 69px;
+    bottom: 30px;
+} */
+        .options {
+            color: black;
+            background: rgb(255, 255, 255);  
+            border: 2px solid rgb(200, 222, 205);
+            width: 200px;
+            padding: 4px;
+            padding-top: 6px;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            border-radius: 20px;
+            margin: 12px 40px;
+        }
+
+        .options input {
+            border-radius: 30px;
+        }
+
+        .discliamer {
+            display: none;
+            position: relative;
+            border: 1px solid black;
+            text-decoration: none;
+            border-radius: 2px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: aliceblue;
+            left: 42%;
+            bottom: 20px;
+            margin-top: 50px;
+            margin: 30px;
+        }
+
+        .discliamer:before {
+            content: '';
+            display: none;
+            position: absolute;
+            left: 140px;
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-bottom-color: black;
+        }
+
+        .discliamer:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 141px;
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border: 9px solid transparent;
+            border-bottom-color: white;
+        }
+
+        #submit {
+            display: none;
+        }
+        #timer{
+            position: absolute;
+            right: 0;
+            background: white;
+            color: red;
+            top:5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <nav>
+            <ul>
+                <li><button id="quiz">Quiz</button></li>
+                <li>
+                    <button id="result">Result</button>
+                </li>
+                <li>
+                    <form method="post" action="/logined/logout"><button value="logout" id="logout">Log Out</button>
+                    </form>
+                </li>
+            </ul>
+            <div id="timer">00:00</div>
+        </nav>
+    </div>
+    <div id="dataofquestion"></div>
+  
+    <!-- <div id="timer"></div> -->
+
+    <div id="root">
+
+    </div>
+    <div id="confirmation">
+        <hr>
+        Please ! Confirm the total CO and each COs total Question : -
+        <button type="reset" value="reset" id="reset">Reset</button>
+        <button type="submit" value="submit" id="final_submit">Submit</button>
+        <!-- DATA GOING TO BACKEND -->
+    </div>
+
+</body>
+<script>
+    let titleselect;
+        const baseUrl = "http://localhost:8383/";
+        const quiz = document.getElementById("quiz")
+        const result = document.getElementById("result")
+        quiz.addEventListener("click", () => {
+            window.location = baseUrl + 'logined/student';
+        })
+        result.addEventListener("click", () => {
+            window.location = baseUrl + 'logined/student/result';
+        })
+
+        let arrMain = [], arr2, arr;
+        async function onll() {
+
+            const res = await fetch(baseUrl + "logined/student/quizinfo",
+                {
+                    method: 'GET'
+                });
+            arr2 = res.json()
+            await arr2.then(function (result) {
+                arrMain.push(result)
+
+            })
+            arrMain=arrMain[0];
+            
+
+            
+            dataofquestion.innerHTML+='<pre>    Your Quizzes in Data Base which is updated or you want structure question answer                </pre>'
+            for (let i = 0; i < arrMain.length; i++) {
+                let line = `<button id="title_${i}">${arrMain[i].title}</button>`
+                dataofquestion.innerHTML+=line
+            }
+            dataofquestion.innerHTML+='<hr>'
+            for (let i = 0; i < arrMain.length; i++) {
+                let title=document.getElementById(`title_${i}`);
+                title.addEventListener("click",(e)=>{
+                    e.preventDefault();
+                    arr=arrMain[i].questions
+                    titleselect=i;
+                    dataofquestion.style.display="none"
+                    us();
+                })
+            }
+           
+            
+        }
+        onll();
+        
+
+        let final_submit = document.getElementById("final_submit")
+        let reset = document.getElementById("reset")
+        let root = document.getElementById("root")
+        let confirmation = document.getElementById("confirmation")
+        let timerr = document.getElementById("timer")
+        // console.log(root)
+        let ele;
+        let y = 0, x = 0, z;
+        let data = new Array;
+        let addhtml = new String;
+
+
+        function us() {
+            confirmation.style.display="block"
+
+
+
+            let timerz = 0;
+            for (let j = 0; j < arr.length; j++) {
+                for (let i = 0; i < arr[j].length; i++) {
+                    timerz += 60;
+                }
+            }
+            // console.log(timerz)
+
+            const time = setInterval(() => {
+                timerz--;
+                timerr.innerHTML = "TICK-TOK : - " + timerz;
+                // console.log(timer)
+                if (timerz == 0) {
+                    clearInterval(time)
+                    final_submit.click();
+                }
+            }, 1000);
+            console.log(timerz)
+
+
+            // questionsss=data[0][0][0]
+
+            // let allQuestions=new Array
+            // allQuestions.push(questionsss)
+            // console.log(allQuestions)
+
+
+            // console.log(arr .length)
+            for (let j = 0; j < arr.length; j++) {
+                addhtml += `<div class="COindicator" id="CO-${j + 1}">for CO-${j + 1}
+`
+
+                for (let i = 0; i < arr[j].length; i++) {
+                    addhtml += `
+                    <div class="loadquestion" id="Question-${j + 1}-${i + 1}">
+        Question ${i + 1}:- ${arr[j][i][0]}`
+                    for (let x = 1; x < arr[j][i].length; x++) {
+                        addhtml += `<div class="options">
+                            <input type="radio" id="${j + 1}-${i + 1}-${x + 1}" name="${j + 1}-${i + 1}" value="${arr[j][i][x]}">
+                            <label for="${j + 1}-${i + 1}-${x + 1}">${arr[j][i][x]}</label>
+                            </div>`
+
+
+                    }
+                    addhtml += '</div>'
+
+                }
+
+                addhtml += `
+                </div><hr>
+`
+            }
+            // console.log(addhtml)
+            root.innerHTML += addhtml
+
+            // next.click();
+            // next.addEventListener('click',(e)=>{
+
+            //     e.preventDefault();
+
+                
+            //     if(x==0){
+            //         let COO=document.getElementById(`CO-${y+1}`)
+            //         COO.style.display='block'
+            //     }
+            //     let questionnn=document.getElementById(`Question-${y+1}-${x+1}`)
+            //     questionnn.style.display='block'
+
+            //     if(y!=0){
+            //     let COOd=document.getElementById(`CO-${y}`)
+            //         COOd.style.display='none'}
+            //     if(x==arr[y].length-1){
+
+            //     }
+            //     if(x==arr[y].length-1){
+            //         x=0        
+            //         y++
+            //         if(y>arr.length-1){
+            //             next.style.display='none'
+            //         }
+            //     }
+            //     else{
+            //         x++
+            //     }
+            
+            // }
+            
+            
+            // )
+            final_submit.addEventListener("click", async(e)=> {
+
+                e.preventDefault();
+                // let COOd=document.getElementById(`CO-${y}`)
+                //     COOd.style.display='none';
+                for (let j = 0; j < arr.length; j++) {
+                    data[j] = new Array;
+                    for (let x = 0; x < arr[j].length; x++) {
+                        ele = document.getElementsByName(`${j + 1}-${x + 1}`)
+                        for (let i = 0; i < ele.length; i++) {
+                            if (ele[i].checked) {
+                                data[j][x] = ele[i].value;
+                            }
+                        }
+                    }
+                }
+                const res = await fetch(window.location.href + '/answerrr',
+                    {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": 'application/json'
+                        },
+                        body: JSON.stringify({ parcel: data,parcel_title:arrMain[titleselect].title})
+
+                    });
+                // let body = document.getElementsByTagName('body')[0]
+                // body.style.display = 'none'
+                if(res.status==200){
+                    alert('Quiz is Submitted')
+
+                }
+                else{
+                    alert("already exist title on this user");
+                
+                }
+            })
+
+
+
+
+            reset.addEventListener("click", (e) => {
+                e.preventDefault();
+                location.reload();
+            })
+
+        }
+</script>
+</html>
+
+

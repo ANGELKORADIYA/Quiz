@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style-type: none;
+
+            /* background-color: black;
+    color: white;    
+    font-size: 30px; */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        body div {
+            color: white;
+        }
+
+        html,
+        body {
+            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        span {
+            background: #1e00ff;
+            color: white;
+            padding: 12px;
+            margin: 5px;
+            border-radius: 12px;
+            font-size: 30px;
+        }
+
+        input,
+        button {
+            padding: 12px;
+            margin: 19px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        hr {
+            margin: 25px 100px;
+        }
+
+        /* navbar */
+        nav {
+            background-color: black;
+        }
+
+        nav ul {
+            padding: 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            padding: 20px;
+            margin: 18px;
+            color: aqua;
+            border-radius: 12px;
+        }
+
+        nav ul li a:hover {
+
+            background-color: white;
+            color: red;
+        }
+
+        /* box */
+        #divof_CO {
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+            /* color: white; */
+        }
+
+        #afterCO,
+        #divof_question,
+        #afterquestion,
+        #confirmation {
+            display: none;
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+        }
+
+        #afterquestion p {
+            padding: 12px;
+            margin: 19px;
+        }
+
+        button:active,
+        input:active {
+            background-color: black;
+            color: white;
+        }
+
+        /*  */
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 96%;
+            margin: 0 auto;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 2%;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        thead tr {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd;
+        }
+
+        tfoot tr {
+            background-color: #f2f2f2;
+        }
+
+        tfoot td {
+            font-weight: bold;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style-type: none;
+
+            /* background-color: black;
+    color: white;    
+    font-size: 30px; */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        body div {
+            color: white;
+        }
+
+        html,
+        body {
+            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        span {
+            background: #1e00ff;
+            color: white;
+            padding: 4px;
+            margin: 5px;
+            border-radius: 12px;
+            font-size: 30px;
+        }
+
+        input,
+        button {
+            padding: 12px;
+            margin: 19px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        hr {
+            margin: 25px 100px;
+        }
+
+        /* navbar */
+        nav {
+            background-color: black;
+        }
+
+        nav ul {
+            padding: 3px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            padding: 20px;
+            margin: 18px;
+            color: aqua;
+            border-radius: 12px;
+        }
+
+        nav ul li a:hover {
+
+            background-color: white;
+            color: red;
+        }
+
+        /* box */
+        #divof_CO {
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+
+        }
+
+        #afterCO,
+        #divof_question,
+        #afterquestion,
+        #confirmation {
+            display: none;
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+        }
+
+        #afterquestion p {
+            padding: 12px;
+            margin: 19px;
+        }
+
+        button:active,
+        input:active {
+            background-color: black;
+            color: white;
+        }
+
+        /*  */
+        #loadquestion {
+            margin: 12px;
+            padding: 12px;
+        }
+
+        #question {
+            margin: 40px;
+            padding: 30px;
+        }
+
+        .loadquestion {
+            margin: 20px;
+        }
+
+        textarea {
+            margin: 50px;
+            width: 90%;
+            height: 50px;
+        }
+
+        #confirmation2 {
+            display: none;
+        }
+
+        hr {
+            /* size:12px; */
+            height: 3px;
+            background-color: black;
+            /* size: 122px; */
+        }
+
+        .COindicator {
+            margin: 20px;
+            font-size: 30px;
+            background-color: blue;
+            color: white;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .loadquestion {
+            border-radius: 7px;
+            margin: 30px;
+            background-color: orange;
+            padding: 10px;
+        }
+
+        textarea {
+            text-align: center;
+            padding-top: 12px;
+        }
+
+        /* .discliamer{
+    position: relative;
+    display: none;
+    padding: 12px;
+    left:42%;
+    bottom: 30px;
+    border-radius: 12px;
+    background-color: aliceblue;
+}   
+
+.discliamer::after{
+    position: absolute;
+    content: '^';
+    font-size: 30px;
+    left: 69px;
+    bottom: 30px;
+} */
+        .options {
+            background: rgb(200, 222, 205);
+
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            border-radius: 30px;
+            margin: 12px 40px;
+        }
+
+        .options input {
+            border-radius: 30px;
+        }
+
+        .discliamer {
+            display: none;
+            position: relative;
+            border: 1px solid black;
+            text-decoration: none;
+            border-radius: 2px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: aliceblue;
+            left: 42%;
+            bottom: 20px;
+            margin-top: 50px;
+            margin: 30px;
+        }
+
+        .discliamer:before {
+            content: '';
+            display: none;
+            position: absolute;
+            left: 140px;
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-bottom-color: black;
+        }
+
+        .discliamer:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 141px;
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border: 9px solid transparent;
+            border-bottom-color: white;
+        }
+        #title{
+            display: none;
+            text-align: center;
+            margin-bottom: 30px;
+            color:white;
+            font-size: 30px;
+            background: rgb(51, 46, 46);
+
+            border-radius: 12px;
+            width: 200px;
+            padding: 12px;
+            margin: 20px auto;
+        }
+        #submit {
+            display: none;
+        }
+    </style>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="nav">
+        <nav>
+            <ul>
+                <li><button id="Create">Create Quiz</button></li>
+                <li>
+                    <button id="Update">Update Quiz</button>
+                </li>
+                <li>
+                    <button id="Response">Response</button>
+                </li>
+                <li>
+                    <form method="post" action="/logined/logout"><button value="logout" id="logout">Log Out</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div id="dataofquestion">
+
+    </div>
+
+
+
+
+   
+
+
+
+
+<div id="title"></div>
+    <table id="myTable"></table>
+    <button onclick="exportTableToExcel('myTable')">Download Excel</button>
+
+    <script>
+
+
+
+        const myTable=document.getElementById('myTable');
+        let titleselect;
+        const baseUrl = "http://localhost:8383/";
+        const create = document.getElementById("Create")
+        const titleid = document.getElementById("title")
+        const update = document.getElementById("Update")
+        const response = document.getElementById("Response")
+        create.addEventListener("click", () => {
+            window.location = baseUrl + 'logined/faculty/create';
+        })
+        update.addEventListener("click", () => {
+            window.location = baseUrl + 'logined/faculty/update';
+        })
+        response.addEventListener("click", () => {
+            window.location = baseUrl + 'logined/faculty/response';
+        })
+
+        let arrMain = [], arr2, arr=[],mainn=[];
+        async function onll() {
+
+            const res = await fetch(baseUrl + "logined/faculty/response/kitten",
+                {
+                    method: 'GET'
+                });
+            arr2 = res.json()
+            await arr2.then(function (result) {
+                mainn.push(result)
+
+            })
+            arrMain = mainn[0];
+
+
+            // Empty object to store unique data
+const uniqueData = {};
+
+// Iterate over the array
+arrMain.forEach(obj => {
+  const data = obj.title; // Change 'name' to the property you want to filter on
+
+  // Check if data already exists
+  if (!uniqueData[data]) {
+    uniqueData[data] = obj; // Store the object as the value
+  }
+});
+
+// Extract the values from the uniqueData object
+const uniqueArray = Object.values(uniqueData);
+console.log(uniqueArray)
+
+
+
+
+
+
+
+
+
+            dataofquestion.innerHTML += '<pre>    Your Quizzes in Data Base which is updated or you want structure question answer                </pre>'
+            for (let i = 0; i < uniqueArray.length; i++) {
+                let line = `<button id="title_${i}">${uniqueArray[i].title}</button>`
+                dataofquestion.innerHTML += line
+
+
+            }
+            dataofquestion.innerHTML += '<hr>'
+            for (let i = 0; i < uniqueArray.length; i++) {
+                let title = document.getElementById(`title_${i}`);
+                title.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    arr=[]
+                    titleid.style.display='block'
+                    titleid.innerHTML=`${title.innerHTML}`
+                    for (let j = 0; j < arrMain.length; j++) {
+                        if(title.innerHTML==arrMain[j].title){
+                            arr.push(arrMain[j])
+                        }
+                        
+                    }
+                    
+                    titleselect = i;
+                    us();
+                })
+            }
+
+        }
+        onll();
+
+
+
+
+        // let arr=[2,2,2];
+
+
+        let flag = 0, flag2 = 0, flag3 = 0;
+        let counter = new Array()
+        let data = new Array;
+        let a;
+        let answer = new Array;
+        let discliamer;
+        let final_submit = document.getElementById("final_submit");
+        // let submit = document.getElementById("submit");
+        let loadquestion = document.getElementById("loadquestion")
+        let confirmation2 = document.getElementById("confirmation2")
+        let dataofquestion = document.getElementById("dataofquestion")
+        let addoption;
+
+
+
+        function us() {
+        // arr=[{answer:[[1],[1]],email:"hardi"},{answer:[[2],[2]],email:"aakk"}]
+            let coloum_count = arr[0].answer.length
+                let row_count = arr.length
+                myTable.innerHTML='<tbody id="tbodyy"><tr id="header"><th id="loginn">login_id</th><th id="addhere"></th></tr>'    
+                let addhere =document.getElementById('addhere')
+                let loginn =document.getElementById('loginn')
+                let tbodyy =document.getElementById('tbodyy')
+                let header =document.getElementById('header')
+                    for (let i = 0; i < coloum_count; i++) {
+                        if(i==0){
+                            header.innerHTML=`<tr><th>email</th>`
+                        }
+                        header.innerHTML+=`<th>CO-${i+1}</th>`;
+                        if(i==coloum_count-1){
+                            header.innerHTML+=`<th>Total</th></tr>`;
+
+                        }
+                    }
+                for (let i = 0; i < row_count; i++) {
+                    let addtext=new String;
+                    if(i==0){
+                        addtext+='<tr>'
+                    }
+                    addtext+=`<td>${arr[i].email}</td>`
+                    for (let j = 0; j < coloum_count; j++) {
+                        addtext+=`<td>${arr[i].answer[j]}</td>`;
+                        tbodyy.appendChild
+                    }
+                    let ams=0;
+                    // for (let j = 0; j < coloum_count; j++) {
+                    //     ams+=arrarr[i].answer[j];
+                    // }
+
+                    // addtext+=`<td>${aws}</td>`;
+                    
+                    for (let j = 0; j < coloum_count; j++) {
+                        ams+=arr[i].answer[j];
+                    }
+
+                    addtext+=`<td>${ams}</td>`;
+                    if(i==row_count-1){
+                        addtext+='</tr>'
+                    }
+                    myTable.innerHTML+=addtext
+                }
+                
+                let addtext=new String;
+                for (let i = 0; i < coloum_count; i++) {
+                    if(i==0){
+                        addtext+=`<tr><th>Per Student</th>`
+                    }
+                    let addhere=0;
+                    for(let j=0;j<row_count;j++){
+                    addhere+=arr[j].answer[i]}
+                    addtext+=`<th>${addhere}</th>`;
+
+
+
+                    if(i==coloum_count-1){
+                        let totalll=0;
+                            for (let x = 0; x< coloum_count; x++) {
+                    for(let j=0;j<row_count;j++){
+                        totalll+=arr[j].answer[x]
+                    }}
+                        addtext+=`<th>${totalll}</th></tr>`;
+
+                    }
+                }
+                myTable.innerHTML+=addtext
+           
+
+}
+function downloadExcel(filename, data) {
+  var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+  var element = document.createElement('a');
+  element.href = window.URL.createObjectURL(blob);
+  element.download = filename;
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+
+function exportTableToExcel(tableID, filename = '') {
+  var downloadFilename = filename || 'table.xls';
+  var table = document.getElementById(tableID);
+  var rows = table.rows;
+  var csvData = [];
+  
+  for (var i = 0; i < rows.length; i++) {
+    var rowData = [];
+    var cells = rows[i].cells;
+    
+    for (var j = 0; j < cells.length; j++) {
+      rowData.push(cells[j].innerText);
+    }
+    
+    csvData.push(rowData.join('\t'));
+  }
+  
+  var csvString = csvData.join('\n');
+  
+  downloadExcel(downloadFilename, csvString);
+}
+
+    </script>
+</body>
+
+</html>

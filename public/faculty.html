@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style-type: none;
+
+            /* background-color: black;
+    color: white;    
+    font-size: 30px; */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        body div {
+            color: white;
+        }
+
+        html,
+        body {
+            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        span {
+            background: #1e00ff;
+            color: white;
+            padding: 4px;
+            margin: 5px;
+            border-radius: 12px;
+            font-size: 30px;
+        }
+
+        input,
+        button {
+            padding: 12px;
+            margin: 19px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        hr {
+            margin: 25px 100px;
+        }
+
+        /* navbar */
+        nav {
+            background-color: black;
+        }
+
+        nav ul {
+            padding: 3px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            padding: 20px;
+            margin: 18px;
+            color: aqua;
+            border-radius: 12px;
+        }
+
+        nav ul li a:hover {
+
+            background-color: white;
+            color: red;
+        }
+
+        /* box */
+        #divof_CO {
+            padding: 12px;
+            margin: 19px;
+            text-align: left;
+            /* display: flex;
+            flex-direction: column; */
+            /* color: white; */
+        }
+
+        #afterCO,
+        #divof_question,
+        #afterquestion,
+        #confirmation {
+            display: none;
+            padding: 12px;
+            margin: 19px;
+            text-align: center;
+        }
+
+        #afterquestion p {
+            padding: 12px;
+            margin: 19px;
+        }
+
+        button:active,
+        input:active {
+            background-color: black;
+            color: white;
+        }
+
+        #Quiz {
+            display: none;
+            text-align: center;
+            padding: 12px;
+            margin: 19px;
+        }
+
+        #titlequiz{
+            background-color: red;
+            font-size: 30px;
+            text-align: center;
+            padding: 6px;
+            width: 200px;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            border-radius: 12px;
+            text-decoration:underline;
+            text-decoration-color:red;
+        }
+        #divof_CO div p{
+            display: inline;
+            background: rgb(51, 46, 46);
+            padding: 9px;
+            font-size: larger;
+            border-radius: 7px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><button id="Create">Create Quiz</button></li>
+            <li>
+                <button id="Update">Update Quiz</button>
+            </li>
+            <li>
+                <button id="Response">Response</button>
+            </li>
+            <li>
+                <form method="post" action="/logined/logout"><button value="logout" id="logout">Log Out</button></form>
+            </li>
+        </ul>
+    </nav>
+    <div>
+        <main>
+            <div id="titlequiz">Quiz Structure </div>
+            <div id="Quiz">Enter Quiz Title :- <span id="quiz_title2"></span>
+                <hr style="margin-bottom:20px ;">
+            </div>
+            <!-- input of how many CO requriment -->
+            <div id="divof_CO">
+                <div><p>Enter Quiz Title :- </p><input type="text" id="quiz_title">
+                <p>How many CO you want ? : -</p>
+                <input type="number" name="CO" id="CO">
+                <!--  --></div>
+                <div id="submittt"><input type="submit" value="Submit" id="count"></div>
+            </div>
+            <!-- display requried CO count -->
+            <div id="afterCO">
+            </div>
+            <div id="divof_question">
+                How many question you want in CO <span id="print_current_co"></span> ? : -
+                <input type="number" name="question_count" id="question_count">
+                <input type="submit" value="Submit" id="count2">
+            </div>
+    </div>
+    <div id="afterquestion">
+    </div>
+    <!-- Confirmation -->
+    <div id="confirmation">
+        <hr>
+        Please ! Confirm the total CO and each COs total Question : -
+        <button type="reset" value="reset" id="reset">Reset</button>
+        <button type="submit" value="submit" id="final_submit">Submit</button>
+        <!-- DATA GOING TO BACKEND -->
+    </div>
+    </main>
+    </div>
+</body>
+<script>
+
+    const baseUrl = "http://localhost:8383/";
+    const create = document.getElementById("Create")
+    const update = document.getElementById("Update")
+    const response = document.getElementById("Response")
+    create.addEventListener("click", () => {
+        window.location =baseUrl+ 'logined/faculty/create';
+    })
+    update.addEventListener("click", () => {
+        window.location =baseUrl + 'logined/faculty/update';
+    })
+    response.addEventListener("click", () => {
+        window.location = baseUrl + 'logined/faculty/response';
+    })
+
+
+
+    let CO = document.getElementById("CO");
+    let count = document.getElementById("count");
+    let count2 = document.getElementById("count2");
+    let question_count = document.getElementById("question_count");
+    let quiz_title = document.getElementById("quiz_title");
+    let divof_CO = document.getElementById("divof_CO");
+    let divof_question = document.getElementById("divof_question");
+    let afterCO = document.getElementById("afterCO");
+    let afterquestion = document.getElementById("afterquestion");
+    let print_current_co = document.getElementById("print_current_co");
+    let confirmation = document.getElementById("confirmation");
+    let a_home = document.getElementById('a_home');
+    let a_question = document.getElementById('a_question');
+    let a_aboutme = document.getElementById('a_aboutme');
+    let a_responses = document.getElementById('a_responses');
+    let quiz_title2 = document.getElementById('quiz_title2');
+    let Quiz = document.getElementById('Quiz');
+    let value
+    //variables
+    let num;
+
+    let arr = [];
+    let current_co = 0;
+
+
+    count.addEventListener("click", (e) => {
+        e.preventDefault();
+        num = CO.value;
+        if (num != '') {
+            divof_CO.style.display = "none";
+            afterCO.innerHTML = `Your total CO s are ${num}<hr>`;
+            afterCO.style.display = "block";
+            divof_question.style.display = "block";
+            Quiz.style.display = 'block'
+            quiz_title2.innerHTML = quiz_title.value;
+        }
+    })
+
+    current_co++;
+    print_current_co.innerHTML = current_co;
+    count2.addEventListener("click", (e) => {
+        e.preventDefault();
+        arr[current_co - 1] = question_count.value;
+        if (question_count.value != '') {
+            if (current_co >= num) {
+                divof_question.style.display = "none";
+                afterquestion.style.display = "block";
+                confirmation.style.display = "block";
+                for (let i = 0; i < num; i++) {
+                    afterquestion.innerHTML += `<p>Your total Question in ${i + 1} is ${arr[i]}</p><br>`
+                }
+            }
+            current_co++;
+            print_current_co.innerHTML = current_co;
+        }
+    })
+
+    let reset = document.getElementById("reset")
+    reset.addEventListener("click", (e) => {
+        e.preventDefault();
+        location.reload();
+    })
+
+    let final_submit = document.getElementById("final_submit");
+    final_submit.addEventListener("click", postInfo)
+    async function postInfo(e) {
+        e.preventDefault();
+        try {
+            const res = await fetch(window.location.href + '/indexxx',
+                {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({ parcel: arr, parcel_title: quiz_title.value })
+
+                });
+                if(res.status==200){
+                    alert('DATA IS UPLOADED');
+                }
+                else if(res.status==401){
+                    alert("already exist title on this user");
+                }
+        }
+        
+        catch {
+            alert('PROBLEM IN POST REQUEST.DATA NOT UPLOADED.');
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>
