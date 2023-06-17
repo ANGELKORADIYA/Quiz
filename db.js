@@ -7,10 +7,10 @@ const loginSchema = new mongoose.Schema({
     page:String,
 })
 const loginModel = mongoose.model('login',loginSchema)
-require('dotenv').config({ path: 'config.env' });
+require('dotenv').config({ path: 'etc/secrets/config.env' });
 const DBurl=process.env.DB_URL;
-const secretKey = process.env.SECRET_KEY;
-const PASSWORD_KEY = process.env.PASSWORD_KEY;
+const secretKey = process.env.SECRET_KEY
+const PASSWORD_KEY = Number(process.env.PASSWORD_KEY);
 /*
 -----MANUAL-----
 
@@ -30,12 +30,14 @@ module.exports.signup= async(signup_data)=>{
         let check = await loginModel.findOne({email:signup_data.email})
     
         if(check){
+            console.log("There is existing email is there.")
+
             return "There is existing email is there."
         }
         else{
        
         loginModel.create({email:signup_data.email,password:await bcrypt.hash(signup_data.password,PASSWORD_KEY),page:signup_data.page})
-    
+        console.log("Data is Uploaded")
         return true;
     }
     }

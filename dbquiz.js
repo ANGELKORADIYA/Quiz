@@ -12,7 +12,7 @@ const quizschema = new mongoose.Schema({
     id:String
 })
 const quizmodel = mongoose.model('quiz', quizschema)
-require('dotenv').config({ path: 'config.env' });
+require('dotenv').config({ path: 'etc/secrets/config.env' });
 const DBurl=process.env.DB_URL;
 
 /*

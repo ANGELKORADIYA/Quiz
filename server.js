@@ -6,7 +6,14 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken")
 
 // const fs = require("fs")
-
+require('dotenv').config({ path: 'etc/secrets/config.env' });
+const dbUrl=process.env.DB_URL;
+const secretKey = process.env.SECRET_KEY;
+console.log('DB URL:', dbUrl);
+console.log('Secret Key:', secretKey);
+console.log('Secret Key:', typeof(secretKey));
+const PASSWORD_KEY = process.env.PASSWORD_KEY;
+console.log('Secret Key:', PASSWORD_KEY);
 
 // Example usage
 
