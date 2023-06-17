@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken")
 
 // const fs = require("fs")
-require('dotenv').config({ path: 'etc/secrets/config.env' });
+require('dotenv').config({ path: 'config.env' });
 const dbUrl=process.env.DB_URL;
 const secretKey = process.env.SECRET_KEY;
 console.log('DB URL:', dbUrl);
