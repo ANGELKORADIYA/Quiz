@@ -12,7 +12,8 @@ const quizschema = new mongoose.Schema({
     id:String
 })
 const quizmodel = mongoose.model('quiz', quizschema)
-
+require('dotenv').config({ path: 'config.env' });
+const DBurl=process.env.DB_URL;
 
 /*
 
@@ -27,7 +28,7 @@ kitteninfo ~ return array for that email
 
 */
 module.exports.indexxx = async (req) => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'Quiz' })
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
     let auth = await valid(req);
     if (auth == 'faculty') {
         let email2 = await email(req);
@@ -48,7 +49,7 @@ module.exports.indexxx = async (req) => {
     }
 }
 module.exports.questionsss = async (req) => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'Quiz' })
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
     let auth = await valid(req);
     if (auth == 'faculty') {
         let emaill = await email(req);
@@ -69,7 +70,7 @@ module.exports.questionsss = async (req) => {
     }
 }
 module.exports.answerfromstudent = async (req) => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'Quiz' })
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
     let auth = await valid(req);
     if (auth == 'student') {
         let emaill = await email(req);
@@ -118,7 +119,7 @@ module.exports.answerfromstudent = async (req) => {
     }
 }
 module.exports.response = async (req) => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'Quiz' })
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
     let auth = await valid(req);
     let infoo;
     if (auth == 'faculty') {
@@ -134,7 +135,7 @@ module.exports.response = async (req) => {
     }
 
 module.exports.kitteninfo = async (req) => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'Quiz' })
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
     let auth = await valid(req);
     if (auth == 'faculty') {
         let email2 = await email(req);
@@ -169,7 +170,7 @@ module.exports.kitteninfo = async (req) => {
 }
 
 module.exports.responseinfo = async (req) => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'Quiz' })
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
     let auth = await valid(req);
     if (auth == 'faculty') {
         let email2 = await email(req);

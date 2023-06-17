@@ -7,6 +7,10 @@ const loginSchema = new mongoose.Schema({
     page:String,
 })
 const loginModel = mongoose.model('login',loginSchema)
+require('dotenv').config({ path: 'config.env' });
+const DBurl=process.env.DB_URL;
+const secretKey = process.env.SECRET_KEY;
+const PASSWORD_KEY = process.env.PASSWORD_KEY;
 /*
 -----MANUAL-----
 
@@ -19,38 +23,37 @@ email ~ same as valid but return email of logged person
 
 */
 module.exports.signup= async(signup_data)=>{
-    await mongoose.connect('mongodb://127.0.0.1:27017/',{
+    let a = await mongoose.connect(DBurl,{
         dbName:'Quiz'
     })
     if(signup_data.password==signup_data.confirm_password){
         let check = await loginModel.findOne({email:signup_data.email})
     
         if(check){
-            console.log("There is existing email is there.")
             return "There is existing email is there."
         }
         else{
        
-        loginModel.create({email:signup_data.email,password:await bcrypt.hash(signup_data.password,10),page:signup_data.page})
-        console.log("Data is Uploaded")
-        
+        loginModel.create({email:signup_data.email,password:await bcrypt.hash(signup_data.password,PASSWORD_KEY),page:signup_data.page})
+    
         return true;
     }
     }
     
     else{        
+
         return "password does not match"
     }
 }
 module.exports.login= async(login_data,res)=>{
-    await mongoose.connect('mongodb://127.0.0.1:27017/',{
+    await mongoose.connect(DBurl,{
         dbName:'Quiz'
     })
     let check = await loginModel.findOne({email:login_data.email})
     if(check){
         if(await bcrypt.compare(login_data.password,check.password)){
             if(login_data.page==check.page){
-                let token = jwt.sign({"email":check._id},"dada")
+                let token = jwt.sign({"email":check._id},secretKey)
                 res.cookie("token",token, { maxAge: 1000000, httpOnly: true });
                 return true
             }
@@ -68,10 +71,10 @@ module.exports.login= async(login_data,res)=>{
     
 }
 module.exports.valid = async(req)=>{
-    await mongoose.connect('mongodb://127.0.0.1:27017/',{
+    await mongoose.connect(DBurl,{
         dbName:'Quiz'
     })
-    const valid = jwt.verify(req.cookies.token,"dada");
+    const valid = jwt.verify(req.cookies.token,secretKey);
     let id = await loginModel.findById(valid.email) 
     if (id){
         return id.page
@@ -82,11 +85,11 @@ module.exports.valid = async(req)=>{
 }
 
 module.exports.email = async(req)=>{
-    await mongoose.connect('mongodb://127.0.0.1:27017/',{
+    await mongoose.connect(DBurl,{
         dbName:'Quiz'
     })
     let auth =await this.valid(req);
-    const valid = jwt.verify(req.cookies.token,"dada");
+    const valid = jwt.verify(req.cookies.token,secretKey);
 
     let id = await loginModel.findById(valid.email)
     return id.email; 

@@ -4,7 +4,12 @@ const path = require("path")
 var bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken")
+
 // const fs = require("fs")
+
+
+// Example usage
+
 const { signup, login, valid } = require("./db")
 const { indexxx, kitteninfo, questionsss, answerfromstudent,responseinfo ,response} = require("./dbquiz")
 
