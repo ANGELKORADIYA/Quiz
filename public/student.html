@@ -6,6 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+              }
+              .center {
+                height: 12vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+              }
+              .wave {
+                width: 5px;
+                height: 50px;
+                background: linear-gradient(45deg, cyan, #fff);
+                margin: 10px;
+                animation: wave 1s linear infinite;
+                border-radius: 20px;
+              }
+              .wave:nth-child(2) {
+                animation-delay: 0.1s;
+              }
+              .wave:nth-child(3) {
+                animation-delay: 0.2s;
+              }
+              .wave:nth-child(4) {
+                animation-delay: 0.3s;
+              }
+              .wave:nth-child(5) {
+                animation-delay: 0.4s;
+              }
+              .wave:nth-child(6) {
+                animation-delay: 0.5s;
+              }
+              .wave:nth-child(7) {
+                animation-delay: 0.6s;
+              }
+              .wave:nth-child(8) {
+                animation-delay: 0.7s;
+              }
+              .wave:nth-child(9) {
+                animation-delay: 0.8s;
+              }
+              .wave:nth-child(10) {
+                animation-delay: 0.9s;
+              }
+              
+              @keyframes wave {
+                0% {
+                  transform: scale(0);
+                }
+                50% {
+                  transform: scale(1);
+                }
+                100% {   transform: scale(0);
+          }
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         * {
             margin: 0;
             padding: 0;
@@ -263,6 +338,18 @@
             <div id="timer">00:00</div>
         </nav>
     </div>
+    <div class="center" id="loading">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+      </div>
     <div id="dataofquestion"></div>
   
     <!-- <div id="timer"></div> -->
@@ -307,7 +394,7 @@
             
 
             
-            dataofquestion.innerHTML+='<pre>    Your Quizzes in Data Base which is updated or you want structure question answer                </pre>'
+            dataofquestion.innerHTML+='<pre>    You can Attend this Quizzes :-                </pre>'
             for (let i = 0; i < arrMain.length; i++) {
                 let line = `<button id="title_${i}">${arrMain[i].title}</button>`
                 dataofquestion.innerHTML+=line
@@ -324,7 +411,8 @@
                 })
             }
            
-            
+            const ccenter = document.getElementById("loading")
+            ccenter.style.display = "none";
         }
         onll();
         

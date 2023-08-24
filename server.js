@@ -7,18 +7,14 @@ const jwt = require("jsonwebtoken")
 
 // const fs = require("fs")
 require('dotenv').config({ path: 'config.env' });
-const dbUrl=process.env.DB_URL;
-const secretKey = process.env.SECRET_KEY;
-console.log('DB URL:', dbUrl);
-console.log('Secret Key:', secretKey);
-console.log('Secret Key:', typeof(secretKey));
-const PASSWORD_KEY = process.env.PASSWORD_KEY;
-console.log('Secret Key:', PASSWORD_KEY);
+const DBurl=process.env.DB_URL;
+const secretKey = process.env.SECRET_KEY
+const PASSWORD_KEY = Number(process.env.PASSWORD_KEY);
 
 // Example usage
 
 const { signup, login, valid } = require("./db")
-const { indexxx, kitteninfo, questionsss, answerfromstudent,responseinfo ,response} = require("./dbquiz")
+const { indexxx, kitteninfo, questionsss, answerfromstudent,responseinfo ,response,resultinfo} = require("./dbquiz")
 
 const baseUrl = "https://quiz-3hxz.onrender.com/";
 const goHomeBtn = `<br><br><br><button style="font-size:25px" onclick="window.location='${baseUrl}'">Click Here to go Home Page</button>`
@@ -168,6 +164,13 @@ app.get("/logined/:pagee/response/kitten", async (req, res) => {
     }
 
 })
+app.get("/logined/:pagee/resulttttss", async (req, res) => {
+    let page = await valid(req)
+    if (page == req.params.pagee) {
+        res.status(200).json(await resultinfo(req))
+    }
+
+})
 app.get("/logined/:pagee/quizinfo", async (req, res) => {
     let page = await valid(req)
     if (page == req.params.pagee) {
@@ -207,7 +210,20 @@ app.get("/logined/:pagee/response", async (req, res) => {
         res.status(404).send("<h1>login first</h1>" + goHomeBtn)
     }
 })
-
+app.get("/logined/:pagee/result",async(req,res)=>{
+    if (req.cookies.token) {
+        let page = await valid(req);
+        if (page == req.params.pagee) {
+                res.status(200).sendFile(path.join(__dirname, "public", `${"result"}.html`))
+            }
+            else {
+                res.status(404).send("<h1>your not access to the site</h1>" + goHomeBtn)
+            }
+        }
+        else {
+            res.status(404).send("<h1>login first</h1>" + goHomeBtn)
+        }
+})
 app.get("/logined/:pagee", async (req, res) => {
     if (req.cookies.token) {
         let page = await valid(req);

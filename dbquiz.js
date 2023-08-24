@@ -194,4 +194,19 @@ module.exports.responseinfo = async (req) => {
     }
     
 }
+module.exports.resultinfo = async (req) => {
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
+    let auth = await valid(req);
+    if (auth == 'student') {
+        let email2 = await email(req);
+        let ret = new Array;
+        let check = await quizmodel.find({ page: "student",email:email2}, { title: true, _id: false, answer:true}, { lean: true }).exec();
+        // let x = await quizmodel.find({page:"faculty",email:email2},{title:true,_id:false})
 
+        
+        if (check) {
+            return check
+        }
+    }
+    
+}
