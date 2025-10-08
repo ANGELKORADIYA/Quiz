@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <title>Quiz Result | Quiz Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View the results of your quiz in the Quiz Application.">
+  <meta name="keywords" content="quiz application, online quiz, quiz result, quiz score">
+
+  <!-- Open Graph Meta Tags for social media sharing -->
+  <meta property="og:title" content="Quiz Result | Quiz Application">
+  <meta property="og:description" content="View the results of your quiz in the Quiz Application.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quiz-minimal.onrender.com/">
+  <meta property="og:image" content="https://quiz-minimal.onrender.com/logo.jpg">
+  <meta property="og:site_name" content="Quiz Application">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quiz Result | Quiz Application">
+  <meta name="twitter:description" content="View the results of your quiz in the Quiz Application.">
+  <meta name="twitter:image" content="https://quiz-minimal.onrender.com/logo.jpg">
+  <link rel="canonical" href="https://quiz-minimal.onrender.com/" />
     <style>
     
 * {
@@ -404,6 +420,7 @@
             display: none;
         }
     </style>
+    <link rel="icon" href="/favicon.ico" />
 </head>
 <body>
     <div id="nav">
@@ -430,7 +447,7 @@
 </body>
 <script>
     let titleselect;
-        const baseUrl = "https://quiz-3hxz.onrender.com/";
+        const baseUrl = process.env.FRONTEND_URL;
         const quiz = document.getElementById("quiz")
         const result = document.getElementById("result")
         quiz.addEventListener("click", () => {

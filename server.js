@@ -21,6 +21,10 @@ const goHomeBtn = `<br><br><br><button style="font-size:25px" onclick="window.lo
 const port = 8383;
 const app = express();
 
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'logo.png'));
+});
+
 app.use(express.json())
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies

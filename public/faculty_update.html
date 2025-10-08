@@ -2,9 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Update Quiz | Faculty | Quiz Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Update or modify quizzes as a faculty member in the Quiz Application.">
+  <meta name="keywords" content="quiz application, online quiz, update quiz, faculty quiz">
+
+  <!-- Open Graph Meta Tags for social media sharing -->
+  <meta property="og:title" content="Update Quiz | Faculty | Quiz Application">
+  <meta property="og:description" content="Update or modify quizzes as a faculty member in the Quiz Application.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quiz-minimal.onrender.com/">
+  <meta property="og:image" content="https://quiz-minimal.onrender.com/logo.jpg">
+  <meta property="og:site_name" content="Quiz Application">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Update Quiz | Faculty | Quiz Application">
+  <meta name="twitter:description" content="Update or modify quizzes as a faculty member in the Quiz Application.">
+  <meta name="twitter:image" content="https://quiz-minimal.onrender.com/logo.jpg">
+  <link rel="canonical" href="https://quiz-minimal.onrender.com/" />
     <style>
          body {
         margin: 0;
@@ -305,6 +322,7 @@
     </style>
 
     <title>Document</title>
+    <link rel="icon" href="/favicon.ico" />
 </head>
 
 <body>
@@ -379,7 +397,7 @@
 
 
         let titleselect;
-        const baseUrl = "https://quiz-3hxz.onrender.com/";
+        const baseUrl = process.env.FRONTEND_URL;
         const create = document.getElementById("Create")
         const update = document.getElementById("Update")
         const response = document.getElementById("Response")
