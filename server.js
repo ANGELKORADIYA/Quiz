@@ -16,7 +16,7 @@ const PASSWORD_KEY = Number(process.env.PASSWORD_KEY);
 const { signup, login, valid } = require("./db")
 const { indexxx, kitteninfo, questionsss, answerfromstudent,responseinfo ,response,resultinfo} = require("./dbquiz")
 
-const baseUrl = "https://quiz-3hxz.onrender.com/";
+const baseUrl = process.env.BASE_URL;
 const goHomeBtn = `<br><br><br><button style="font-size:25px" onclick="window.location='${baseUrl}'">Click Here to go Home Page</button>`
 const port = 8383;
 const app = express();
