@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow authenticated dashboard pages
+Disallow: /logined/
+
+Sitemap: https://quiz-minimal.onrender.com/sitemap.xml
