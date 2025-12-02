@@ -32,572 +32,541 @@
         "description": "Student dashboard to take quizzes and view results in the Quiz Application."
     }
     </script>
+    
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/favicon.ico" />
+    
     <style>
-        body {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-              }
-              .center {
-                height: 12vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: #000;
-              }
-              .wave {
-                width: 5px;
-                height: 50px;
-                background: linear-gradient(45deg, cyan, #fff);
-                margin: 10px;
-                animation: wave 1s linear infinite;
-                border-radius: 20px;
-              }
-              .wave:nth-child(2) {
-                animation-delay: 0.1s;
-              }
-              .wave:nth-child(3) {
-                animation-delay: 0.2s;
-              }
-              .wave:nth-child(4) {
-                animation-delay: 0.3s;
-              }
-              .wave:nth-child(5) {
-                animation-delay: 0.4s;
-              }
-              .wave:nth-child(6) {
-                animation-delay: 0.5s;
-              }
-              .wave:nth-child(7) {
-                animation-delay: 0.6s;
-              }
-              .wave:nth-child(8) {
-                animation-delay: 0.7s;
-              }
-              .wave:nth-child(9) {
-                animation-delay: 0.8s;
-              }
-              .wave:nth-child(10) {
-                animation-delay: 0.9s;
-              }
-              
-              @keyframes wave {
-                0% {
-                  transform: scale(0);
-                }
-                50% {
-                  transform: scale(1);
-                }
-                100% {   transform: scale(0);
-          }
-        }
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         * {
             margin: 0;
             padding: 0;
-            text-decoration: none;
-            list-style-type: none;
-
-            /* background-color: black;
-    color: white;    
-    font-size: 30px; */
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body div {
-            color: white;
-        }
-
-        html,
         body {
-            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
-
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
         }
 
-        a {
-            cursor: pointer;
-        }
-
-        span {
-            background: #1e00ff;
-            color: white;
-            padding: 4px;
-            margin: 5px;
-            border-radius: 12px;
-            font-size: 30px;
-        }
-
-        input,
-        button ,#timer{
-            padding: 12px;
-            margin: 19px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 500px;
-        }
-
-        hr {
-            margin: 25px 100px;
-        }
-
-        /* navbar */
+        /* Navbar Styles */
         nav {
-            background-color: black;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav ul {
-            padding: 3px;
+            list-style: none;
+            padding: 1rem 2rem;
             display: flex;
-            flex-direction: row;
+            gap: 0.5rem;
+            align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
-        nav ul li a {
-            padding: 20px;
-            margin: 18px;
-            color: aqua;
-            border-radius: 12px;
+        nav button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            background: rgba(51, 65, 85, 0.8);
+            color: #cbd5e1;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
-        nav ul li a:hover {
-
-            background-color: white;
-            color: red;
-        }
-
-        /* box */
-        #divof_CO {
-            padding: 12px;
-            margin: 19px;
-            text-align: center;
-
-        }
-
-        #afterCO,
-        #divof_question,
-        #afterquestion,
-        #confirmation {
-            display: none;
-            padding: 12px;
-            margin: 19px;
-            text-align: center;
-        }
-
-        #afterquestion p {
-            padding: 12px;
-            margin: 19px;
-        }
-
-        button:active,
-        input:active {
-            background-color: black;
+        nav button:hover {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);
         }
 
-        /*  */
-        #loadquestion {
-            margin: 12px;
-            padding: 12px;
+        #timer {
+            background: #ef4444;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3);
+            margin-left: auto;
         }
 
-        #question {
-            margin: 40px;
-            padding: 30px;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        .loadquestion {
-            margin: 20px;
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        textarea {
-            margin: 50px;
-            width: 90%;
-            height: 50px;
+        .page-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
         }
 
-        #confirmation2 {
-            display: none;
+        /* Quiz Selection Grid */
+        .quiz-selection {
+            margin-bottom: 2rem;
         }
 
-        hr {
-            /* size:12px; */
-            height: 3px;
-            background-color: black;
-            /* size: 122px; */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .quiz-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.2);
+            border-color: #06b6d4;
+        }
+
+        .quiz-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quiz-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Quiz Content Area */
+        #root {
+            margin-top: 2rem;
         }
 
         .COindicator {
-            margin: 20px;
-            font-size: 30px;
-            background-color: blue;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: white;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
         }
 
         .loadquestion {
-            border-radius: 7px;
-            margin: 30px;
-            background-color: orange;
-            padding: 10px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
         }
 
-        textarea {
-            text-align: center;
-            padding-top: 12px;
+        .loadquestion {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: #f1f5f9;
         }
 
-        /* .discliamer{
-    position: relative;
-    display: none;
-    padding: 12px;
-    left:42%;
-    bottom: 30px;
-    border-radius: 12px;
-    background-color: aliceblue;
-}   
-
-.discliamer::after{
-    position: absolute;
-    content: '^';
-    font-size: 30px;
-    left: 69px;
-    bottom: 30px;
-} */
         .options {
-            color: black;
-            background: rgb(255, 255, 255);  
-            border: 2px solid rgb(200, 222, 205);
-            width: 200px;
-            padding: 4px;
-            padding-top: 6px;
-            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            margin: 0.75rem 0;
             display: flex;
-            justify-content: center;
-            border-radius: 20px;
-            margin: 12px 40px;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .options input {
-            border-radius: 30px;
+        .options:hover {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: #06b6d4;
         }
 
-        .discliamer {
-            display: none;
-            position: relative;
-            border: 1px solid black;
-            text-decoration: none;
-            border-radius: 2px;
-            padding: 20px;
-            border-radius: 12px;
-            background-color: aliceblue;
-            left: 42%;
-            bottom: 20px;
-            margin-top: 50px;
-            margin: 30px;
+        .options input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
         }
 
-        .discliamer:before {
-            content: '';
-            display: none;
-            position: absolute;
-            left: 140px;
-            bottom: 100%;
-            width: 0;
-            height: 0;
-            border: 10px solid transparent;
-            border-bottom-color: black;
+        .options label {
+            flex: 1;
+            cursor: pointer;
+            color: #cbd5e1;
+            font-size: 1rem;
         }
 
-        .discliamer:after {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 141px;
-            bottom: 100%;
-            width: 0;
-            height: 0;
-            border: 9px solid transparent;
-            border-bottom-color: white;
+        /* Confirmation Section */
+        #confirmation {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 1rem;
+            border: 2px solid rgba(148, 163, 184, 0.1);
         }
 
-        #submit {
-            display: none;
+        #confirmation button {
+            padding: 1rem 2rem;
+            margin: 1rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        #timer{
-            position: absolute;
-            right: 0;
-            background: white;
-            color: red;
-            top:5px;
+
+        #reset {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 2px solid #ef4444;
+        }
+
+        #reset:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        #final_submit {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+        }
+
+        #final_submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
+            margin: 2rem 0;
         }
     </style>
-    <link rel="icon" href="/favicon.ico" />
 </head>
 <body>
-    <div id="nav">
-        <nav>
-            <ul>
-                <li><button id="quiz">Quiz</button></li>
-                <li>
-                    <button id="result">Result</button>
-                </li>
-                <li>
-                    <form method="post" action="/logined/logout"><button value="logout" id="logout">Log Out</button>
-                    </form>
-                </li>
-            </ul>
-            <div id="timer">00:00</div>
-        </nav>
-    </div>
-    <div class="center" id="loading">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-      </div>
-    <div id="dataofquestion"></div>
-  
-    <!-- <div id="timer"></div> -->
+    <nav>
+        <ul>
+            <li><button id="quiz">Quiz</button></li>
+            <li><button id="result">Result</button></li>
+            <li>
+                <form method="post" action="/logined/logout" style="margin: 0;">
+                    <button value="logout" id="logout">Log Out</button>
+                </form>
+            </li>
+            <div id="timer" style="display: none;">00:00</div>
+        </ul>
+    </nav>
 
-    <div id="root">
+    <div class="container">
+        <!-- Loading State -->
+        <div class="loading-container" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading quizzes...</div>
+        </div>
 
-    </div>
-    <div id="confirmation">
-        <hr>
-        Please ! Confirm the total CO and each COs total Question : -
-        <button type="reset" value="reset" id="reset">Reset</button>
-        <button type="submit" value="submit" id="final_submit">Submit</button>
-        <!-- DATA GOING TO BACKEND -->
+        <!-- Quiz Selection -->
+        <div id="quiz-selection" style="display: none;">
+            <h1 class="page-title">Available Quizzes</h1>
+            <p class="page-subtitle">Select a quiz to begin</p>
+            <div class="quiz-grid" id="quiz-grid"></div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state" style="display: none;">
+            <div class="empty-state-icon">📝</div>
+            <h2 class="empty-state-title">No Quizzes Available</h2>
+            <p class="empty-state-description">
+                There are currently no quizzes available for you to take. 
+                Please check back later or contact your instructor.
+            </p>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-message" id="error-state" style="display: none;">
+            <div class="error-title">⚠️ Error Loading Quizzes</div>
+            <p class="error-description" id="error-description"></p>
+            <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 1rem;">
+                Retry
+            </button>
+        </div>
+
+        <!-- Quiz Content -->
+        <div id="root"></div>
+
+        <!-- Confirmation -->
+        <div id="confirmation" style="display: none;">
+            <hr>
+            <p style="font-size: 1.25rem; margin-bottom: 1rem;">
+                Please confirm and submit your answers
+            </p>
+            <button type="reset" value="reset" id="reset">Reset</button>
+            <button type="submit" value="submit" id="final_submit">Submit Quiz</button>
+        </div>
     </div>
 
-</body>
 <script>
-    let titleselect;
-        const baseUrl = process.env.FRONTEND_URL;
-        const quiz = document.getElementById("quiz")
-        const result = document.getElementById("result")
-        quiz.addEventListener("click", () => {
-            window.location = baseUrl + 'logined/student';
-        })
-        result.addEventListener("click", () => {
-            window.location = baseUrl + 'logined/student/result';
-        })
+    const baseUrl = window.location.origin + '/';
+    const quiz = document.getElementById("quiz");
+    const result = document.getElementById("result");
+    const loadingEl = document.getElementById("loading");
+    const quizSelectionEl = document.getElementById("quiz-selection");
+    const emptyStateEl = document.getElementById("empty-state");
+    const errorStateEl = document.getElementById("error-state");
+    const errorDescriptionEl = document.getElementById("error-description");
+    const quizGridEl = document.getElementById("quiz-grid");
+    const root = document.getElementById("root");
+    const confirmation = document.getElementById("confirmation");
+    const timerEl = document.getElementById("timer");
+    const final_submit = document.getElementById("final_submit");
+    const reset = document.getElementById("reset");
 
-        let arrMain = [], arr2, arr;
-        async function onll() {
+    let selectedQuiz = null;
+    let quizData = null;
 
-            const res = await fetch(baseUrl + "logined/student/quizinfo",
-                {
-                    method: 'GET'
-                });
-            arr2 = res.json()
-            await arr2.then(function (result) {
-                arrMain.push(result)
+    // Navigation
+    quiz.addEventListener("click", () => {
+        window.location = baseUrl + 'logined/student';
+    });
+    
+    result.addEventListener("click", () => {
+        window.location = baseUrl + 'logined/student/result';
+    });
 
-            })
-            arrMain=arrMain[0];
+    // Load quiz titles on page load
+    async function loadQuizTitles() {
+        try {
+            loadingEl.style.display = 'flex';
+            quizSelectionEl.style.display = 'none';
+            emptyStateEl.style.display = 'none';
+            errorStateEl.style.display = 'none';
+
+            const res = await fetch(baseUrl + "logined/student/quiztitles");
             
+            if (!res.ok) {
+                throw new Error('Failed to fetch quizzes');
+            }
 
+            const titles = await res.json();
             
-            dataofquestion.innerHTML+='<pre>    You can Attend this Quizzes :-                </pre>'
-            for (let i = 0; i < arrMain.length; i++) {
-                let line = `<button id="title_${i}">${arrMain[i].title}</button>`
-                dataofquestion.innerHTML+=line
+            loadingEl.style.display = 'none';
+
+            if (titles.length === 0) {
+                emptyStateEl.style.display = 'flex';
+            } else {
+                quizSelectionEl.style.display = 'block';
+                renderQuizCards(titles);
             }
-            dataofquestion.innerHTML+='<hr>'
-            for (let i = 0; i < arrMain.length; i++) {
-                let title=document.getElementById(`title_${i}`);
-                title.addEventListener("click",(e)=>{
-                    e.preventDefault();
-                    arr=arrMain[i].questions
-                    titleselect=i;
-                    dataofquestion.style.display="none"
-                    us();
-                })
-            }
-           
-            const ccenter = document.getElementById("loading")
-            ccenter.style.display = "none";
+        } catch (error) {
+            console.error('Error loading quizzes:', error);
+            loadingEl.style.display = 'none';
+            errorStateEl.style.display = 'block';
+            errorDescriptionEl.textContent = error.message || 'Unable to load quizzes. Please try again later.';
         }
-        onll();
+    }
+
+    // Render quiz cards
+    function renderQuizCards(titles) {
+        quizGridEl.innerHTML = '';
         
+        titles.forEach((quiz, index) => {
+            const card = document.createElement('div');
+            card.className = 'quiz-card fade-in';
+            card.innerHTML = `
+                <div class="quiz-card-icon">📋</div>
+                <div class="quiz-card-title">${quiz.title}</div>
+            `;
+            card.addEventListener('click', () => loadQuiz(quiz.title));
+            quizGridEl.appendChild(card);
+        });
+    }
 
-        let final_submit = document.getElementById("final_submit")
-        let reset = document.getElementById("reset")
-        let root = document.getElementById("root")
-        let confirmation = document.getElementById("confirmation")
-        let timerr = document.getElementById("timer")
-        // console.log(root)
-        let ele;
-        let y = 0, x = 0, z;
-        let data = new Array;
-        let addhtml = new String;
+    // Load full quiz data when selected
+    async function loadQuiz(title) {
+        try {
+            loadingEl.style.display = 'flex';
+            quizSelectionEl.style.display = 'none';
 
-
-        function us() {
-            confirmation.style.display="block"
-
-
-
-            let timerz = 0;
-            for (let j = 0; j < arr.length; j++) {
-                for (let i = 0; i < arr[j].length; i++) {
-                    timerz += 60;
-                }
+            const res = await fetch(baseUrl + `logined/student/quiz/${encodeURIComponent(title)}`);
+            
+            if (!res.ok) {
+                const error = await res.json();
+                throw new Error(error.error || 'Failed to load quiz');
             }
-            // console.log(timerz)
 
-            const time = setInterval(() => {
-                timerz--;
-                timerr.innerHTML = "TICK-TOK : - " + timerz;
-                // console.log(timer)
-                if (timerz == 0) {
-                    clearInterval(time)
-                    final_submit.click();
-                }
-            }, 1000);
-            console.log(timerz)
-
-
-            // questionsss=data[0][0][0]
-
-            // let allQuestions=new Array
-            // allQuestions.push(questionsss)
-            // console.log(allQuestions)
-
-
-            // console.log(arr .length)
-            for (let j = 0; j < arr.length; j++) {
-                addhtml += `<div class="COindicator" id="CO-${j + 1}">for CO-${j + 1}
-`
-
-                for (let i = 0; i < arr[j].length; i++) {
-                    addhtml += `
-                    <div class="loadquestion" id="Question-${j + 1}-${i + 1}">
-        Question ${i + 1}:- ${arr[j][i][0]}`
-                    for (let x = 1; x < arr[j][i].length; x++) {
-                        addhtml += `<div class="options">
-                            <input type="radio" id="${j + 1}-${i + 1}-${x + 1}" name="${j + 1}-${i + 1}" value="${arr[j][i][x]}">
-                            <label for="${j + 1}-${i + 1}-${x + 1}">${arr[j][i][x]}</label>
-                            </div>`
-
-
-                    }
-                    addhtml += '</div>'
-
-                }
-
-                addhtml += `
-                </div><hr>
-`
-            }
-            // console.log(addhtml)
-            root.innerHTML += addhtml
-
-            // next.click();
-            // next.addEventListener('click',(e)=>{
-
-            //     e.preventDefault();
-
-                
-            //     if(x==0){
-            //         let COO=document.getElementById(`CO-${y+1}`)
-            //         COO.style.display='block'
-            //     }
-            //     let questionnn=document.getElementById(`Question-${y+1}-${x+1}`)
-            //     questionnn.style.display='block'
-
-            //     if(y!=0){
-            //     let COOd=document.getElementById(`CO-${y}`)
-            //         COOd.style.display='none'}
-            //     if(x==arr[y].length-1){
-
-            //     }
-            //     if(x==arr[y].length-1){
-            //         x=0        
-            //         y++
-            //         if(y>arr.length-1){
-            //             next.style.display='none'
-            //         }
-            //     }
-            //     else{
-            //         x++
-            //     }
+            quizData = await res.json();
+            selectedQuiz = title;
             
-            // }
-            
-            
-            // )
-            final_submit.addEventListener("click", async(e)=> {
-
-                e.preventDefault();
-                // let COOd=document.getElementById(`CO-${y}`)
-                //     COOd.style.display='none';
-                for (let j = 0; j < arr.length; j++) {
-                    data[j] = new Array;
-                    for (let x = 0; x < arr[j].length; x++) {
-                        ele = document.getElementsByName(`${j + 1}-${x + 1}`)
-                        for (let i = 0; i < ele.length; i++) {
-                            if (ele[i].checked) {
-                                data[j][x] = ele[i].value;
-                            }
-                        }
-                    }
-                }
-                const res = await fetch(window.location.href + '/answerrr',
-                    {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": 'application/json'
-                        },
-                        body: JSON.stringify({ parcel: data,parcel_title:arrMain[titleselect].title})
-
-                    });
-                // let body = document.getElementsByTagName('body')[0]
-                // body.style.display = 'none'
-                if(res.status==200){
-                    alert('Quiz is Submitted')
-
-                }
-                else{
-                    alert("already exist title on this user");
-                
-                }
-            })
-
-
-
-
-            reset.addEventListener("click", (e) => {
-                e.preventDefault();
-                location.reload();
-            })
-
+            loadingEl.style.display = 'none';
+            renderQuiz(quizData);
+        } catch (error) {
+            console.error('Error loading quiz:', error);
+            loadingEl.style.display = 'none';
+            errorStateEl.style.display = 'block';
+            errorDescriptionEl.textContent = error.message || 'Unable to load quiz. Please try again.';
         }
+    }
+
+    // Render quiz questions
+    function renderQuiz(quiz) {
+        const arr = quiz.questions;
+        let addhtml = '';
+        
+        // Setup timer
+        let timerz = 0;
+        for (let j = 0; j < arr.length; j++) {
+            for (let i = 0; i < arr[j].length; i++) {
+                timerz += 60;
+            }
+        }
+
+        timerEl.style.display = 'block';
+        const timerInterval = setInterval(() => {
+            timerz--;
+            const minutes = Math.floor(timerz / 60);
+            const seconds = timerz % 60;
+            timerEl.innerHTML = `⏱️ ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            if (timerz <= 0) {
+                clearInterval(timerInterval);
+                final_submit.click();
+            }
+        }, 1000);
+
+        // Render questions
+        for (let j = 0; j < arr.length; j++) {
+            addhtml += `<div class="COindicator">CO-${j + 1}</div>`;
+
+            for (let i = 0; i < arr[j].length; i++) {
+                addhtml += `
+                    <div class="loadquestion">
+                        <strong>Question ${i + 1}:</strong> ${arr[j][i][0]}
+                `;
+                
+                for (let x = 1; x < arr[j][i].length; x++) {
+                    addhtml += `
+                        <div class="options">
+                            <input type="radio" id="${j + 1}-${i + 1}-${x}" name="${j + 1}-${i + 1}" value="${arr[j][i][x]}">
+                            <label for="${j + 1}-${i + 1}-${x}">${arr[j][i][x]}</label>
+                        </div>
+                    `;
+                }
+                
+                addhtml += '</div>';
+            }
+            addhtml += '<hr>';
+        }
+
+        root.innerHTML = addhtml;
+        confirmation.style.display = 'block';
+    }
+
+    // Submit quiz
+    final_submit.addEventListener("click", async (e) => {
+        e.preventDefault();
+        
+        if (!quizData || !selectedQuiz) return;
+
+        const arr = quizData.questions;
+        const data = [];
+
+        for (let j = 0; j < arr.length; j++) {
+            data[j] = [];
+            for (let x = 0; x < arr[j].length; x++) {
+                const ele = document.getElementsByName(`${j + 1}-${x + 1}`);
+                for (let i = 0; i < ele.length; i++) {
+                    if (ele[i].checked) {
+                        data[j][x] = ele[i].value;
+                    }
+                }
+            }
+        }
+
+        try {
+            const res = await fetch(window.location.href + '/answerrr', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({ 
+                    parcel: data,
+                    parcel_title: selectedQuiz
+                })
+            });
+
+            if (res.status == 200) {
+                alert('✅ Quiz submitted successfully!');
+                window.location.reload();
+            } else {
+                alert('❌ Error: Quiz already submitted or invalid submission');
+            }
+        } catch (error) {
+            alert('❌ Error submitting quiz. Please try again.');
+            console.error(error);
+        }
+    });
+
+    // Reset
+    reset.addEventListener("click", (e) => {
+        e.preventDefault();
+        location.reload();
+    });
+
+    // Initialize
+    loadQuizTitles();
 </script>
+</body>
 </html>
-
-

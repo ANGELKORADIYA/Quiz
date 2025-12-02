@@ -117,7 +117,7 @@ body {
 
         html,
         body {
-            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
 
         }
 
@@ -126,7 +126,7 @@ body {
         }
 
         span {
-            background: #1e00ff;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
             padding: 12px;
             margin: 5px;
@@ -158,17 +158,27 @@ body {
             justify-content: center;
         }
 
-        nav ul li a {
-            padding: 20px;
-            margin: 18px;
-            color: aqua;
-            border-radius: 12px;
+        nav ul li a,
+        nav ul li button {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: rgba(51, 65, 85, 0.8);
+            color: #cbd5e1;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        nav ul li a:hover {
-
-            background-color: white;
-            color: red;
+        nav ul li a:hover,
+        nav ul li button:hover {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);
         }
 
         /* box */
@@ -276,7 +286,7 @@ body {
 
         html,
         body {
-            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
 
         }
 
@@ -285,7 +295,7 @@ body {
         }
 
         span {
-            background: #1e00ff;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
             padding: 4px;
             margin: 5px;
@@ -308,7 +318,13 @@ body {
 
         /* navbar */
         nav {
-            background-color: black;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav ul {
@@ -318,17 +334,27 @@ body {
             justify-content: center;
         }
 
-        nav ul li a {
-            padding: 20px;
-            margin: 18px;
-            color: aqua;
-            border-radius: 12px;
+        nav ul li a,
+        nav ul li button {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: rgba(51, 65, 85, 0.8);
+            color: #cbd5e1;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        nav ul li a:hover {
-
-            background-color: white;
-            color: red;
+        nav ul li a:hover,
+        nav ul li button:hover {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);
         }
 
         /* box */
@@ -488,7 +514,7 @@ body {
             margin-bottom: 30px;
             color:white;
             font-size: 30px;
-            background: rgb(51, 46, 46);
+            background: rgba(30, 41, 59, 0.8);
 
             border-radius: 12px;
             width: 200px;
@@ -498,8 +524,86 @@ body {
         #submit {
             display: none;
         }
+
+        /* Quiz Selection Grid */
+        .quiz-selection {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        #quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .quiz-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.2);
+            border-color: #06b6d4;
+        }
+
+        .quiz-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quiz-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
     </style>
 
+    <link rel="stylesheet" href="/style.css">
     <link rel="icon" href="/favicon.ico" />
 
 
@@ -537,7 +641,11 @@ body {
         <div class="wave"></div>
       </div>
     <div id="dataofquestion">
-
+        <div class="quiz-selection">
+                    <h1 class="page-title">Quiz Responses</h1>
+                    <p class="page-subtitle">Select a quiz to view student responses</p>
+                    <div id="quiz-grid"></div>
+        </div>
     </div>
 
 
@@ -558,7 +666,7 @@ body {
 
         const myTable=document.getElementById('myTable');
         let titleselect;
-        const baseUrl = process.env.FRONTEND_URL;
+        const baseUrl = window.location.origin + '/';
         const create = document.getElementById("Create")
         const titleid = document.getElementById("title")
         const update = document.getElementById("Update")
@@ -604,32 +712,26 @@ arrMain.forEach(obj => {
 // Extract the values from the uniqueData object
 const uniqueArray = Object.values(uniqueData);
 console.log(uniqueArray)
+console.log(uniqueArray.length)
 
-
-
-
-
-
-
-
-
-            dataofquestion.innerHTML += "<pre>    Which quiz's response you want select that quiz in following :-                </pre>"
+           
+            
+            const quizGrid = document.getElementById('quiz-grid');
             for (let i = 0; i < uniqueArray.length; i++) {
-                let line = `<button id="title_${i}">${uniqueArray[i].title}</button>`
-                dataofquestion.innerHTML += line
-
-
-            }
-            dataofquestion.innerHTML += '<hr>'
-            for (let i = 0; i < uniqueArray.length; i++) {
-                let title = document.getElementById(`title_${i}`);
-                title.addEventListener("click", (e) => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card fade-in';
+                card.innerHTML = `
+                    <div class="quiz-card-icon">📊</div>
+                    <div class="quiz-card-title">${uniqueArray[i].title}</div>
+                `;
+                quizGrid.appendChild(card);
+                card.addEventListener("click", (e) => {
                     e.preventDefault();
-                    arr=[]
-                    titleid.style.display='block'
-                    titleid.innerHTML=`${title.innerHTML}`
+                    arr = [];
+                    titleid.style.display = 'block';
+                    titleid.innerHTML = `${uniqueArray[i].title}`;
                     for (let j = 0; j < arrMain.length; j++) {
-                        if(title.innerHTML==arrMain[j].title){
+                        if (uniqueArray[i].title == arrMain[j].title) {
                             arr.push(arrMain[j])
                         }
                         

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
   <title>Login & Signup | Quiz Application</title>
@@ -9,343 +8,589 @@
   <meta name="description" content="Login or Signup to access the Quiz Application. Create quizzes as a faculty member or take quizzes as a student.">
   <meta name="keywords" content="quiz application, online quiz, login, signup, student quiz, faculty quiz">
 
-  <!-- Open Graph Meta Tags for social media sharing -->
+  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Login & Signup | Quiz Application">
-  <meta property="og:description" content="Access your account or create a new one to use the Quiz Application. Faculty can create quizzes and students can test their knowledge.">
+  <meta property="og:description" content="Access your account or create a new one to use the Quiz Application.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://quiz-minimal.onrender.com/">
-  <meta property="og:image" content="https://quiz-minimal.onrender.com/logo.jpg"> <!-- Replace with a relevant image URL -->
+  <meta property="og:image" content="https://quiz-minimal.onrender.com/logo.jpg">
   <meta property="og:site_name" content="Quiz Application">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Login & Signup | Quiz Application">
-  <meta name="twitter:description" content="Join the Quiz Application. Login to continue your learning journey or sign up to get started.">
-  <meta name="twitter:image" content="https://quiz-minimal.onrender.com/logo.jpg"> <!-- Replace with a relevant image URL -->
+  <meta name="twitter:description" content="Join the Quiz Application.">
+  <meta name="twitter:image" content="https://quiz-minimal.onrender.com/logo.jpg">
   <link rel="canonical" href="https://quiz-minimal.onrender.com/" />
   <meta name="robots" content="index, follow">
 
-  <!-- JSON-LD structured data for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Quiz Application",
-    "url": "https://quiz-minimal.onrender.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://quiz-minimal.onrender.com/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "url": "https://quiz-minimal.onrender.com/"
   }
   </script>
+  
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/favicon.ico" />
+  
   <style>
-    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
-    html,
-    body {
-      display: grid;
+    html, body {
       height: 100%;
       width: 100%;
-      place-items: center;
-      background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
+      position: relative;
+      overflow: hidden;
     }
 
-    ::selection {
-      background: #fa4299;
-      color: #fff;
+    /* Animated background circles */
+    body::before,
+    body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+      animation: float 20s infinite ease-in-out;
+    }
+
+    body::before {
+      width: 500px;
+      height: 500px;
+      top: -250px;
+      left: -250px;
+    }
+
+    body::after {
+      width: 400px;
+      height: 400px;
+      bottom: -200px;
+      right: -200px;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
     }
 
     .wrapper {
-      overflow: hidden;
-      max-width: 390px;
-      background: #fff;
-      padding: 30px;
-      border-radius: 5px;
-      box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .wrapper .title-text {
-      display: flex;
-      width: 200%;
-    }
-
-    .wrapper .title {
-      width: 50%;
-      font-size: 35px;
-      font-weight: 600;
-      text-align: center;
-      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    .wrapper .slide-controls {
       position: relative;
-      display: flex;
-      height: 50px;
-      width: 100%;
-      overflow: hidden;
-      margin: 30px 0 10px 0;
-      justify-content: space-between;
-      border: 1px solid lightgrey;
-      border-radius: 5px;
-    }
-
-    .slide-controls .slide {
-      height: 100%;
-      width: 100%;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 500;
-      text-align: center;
-      line-height: 48px;
-      cursor: pointer;
       z-index: 1;
-      transition: all 0.6s ease;
+      max-width: 450px;
+      width: 90%;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 3rem;
+      border-radius: 1.5rem;
+      border: 2px solid rgba(148, 163, 184, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
-    .slide-controls label.signup {
-      color: #000;
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .slide-controls .slider-tab {
-      position: absolute;
-      height: 100%;
-      width: 50%;
-      left: 0;
-      z-index: 0;
-      border-radius: 5px;
-      background: -webkit-linear-gradient(left, #a445b2, #fa4299);
-      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    .logo-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
     }
 
-    input[type="radio"] {
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-subtitle {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    .slide-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 0.5rem;
+      border-radius: 0.75rem;
+    }
+
+    .slide-controls label {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      color: #94a3b8;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .slide-controls input[type="radio"] {
       display: none;
     }
 
-    #signup:checked~.slider-tab {
-      left: 50%;
+    .slide-controls input[type="radio"]:checked + label {
+      background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+      color: white;
+      box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.3);
     }
 
-    #signup:checked~label.signup {
-      color: #fff;
-      cursor: default;
-      user-select: none;
-    }
-
-    #signup:checked~label.login {
-      color: #000;
-    }
-
-    #login:checked~label.signup {
-      color: #000;
-    }
-
-    #login:checked~label.login {
-      cursor: default;
-      user-select: none;
-    }
-
-    .wrapper .form-container {
-      width: 100%;
+    .form-container {
+      position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
-    .form-container .form-inner {
+    .form-inner {
       display: flex;
       width: 200%;
-    }
-
-    .form-container .form-inner form {
-      width: 50%;
       transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
-    .form-inner form .field {
-      height: 50px;
-      width: 100%;
-      margin-top: 20px;
+    .form-inner form {
+      width: 50%;
+      flex-shrink: 0;
     }
 
-    .form-inner form .field input {
-      height: 100%;
+    .form-inner.signup-active {
+      transform: translateX(-50%);
+    }
+
+    .field {
+      margin-bottom: 1.5rem;
+    }
+
+    .field label {
+      display: block;
+      color: #cbd5e1;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .field input,
+    .field select {
       width: 100%;
+      padding: 0.875rem 1rem;
+      background: rgba(15, 23, 42, 0.5);
+      border: 2px solid rgba(148, 163, 184, 0.2);
+      border-radius: 0.75rem;
+      color: #f1f5f9;
+      font-size: 1rem;
+      transition: all 0.3s ease;
       outline: none;
-      padding-left: 15px;
-      border-radius: 5px;
-      border: 1px solid lightgrey;
-      border-bottom-width: 2px;
-      font-size: 17px;
+    }
+
+    .field input::placeholder {
+      color: #64748b;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #06b6d4;
+      background: rgba(15, 23, 42, 0.7);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    }
+
+    .field select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1.25rem;
+      padding-right: 2.5rem;
+    }
+
+    .field select option {
+      background: #1e293b;
+      color: #f1f5f9;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+      border: none;
+      border-radius: 0.75rem;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.3);
+      margin-top: 0.5rem;
     }
 
-    .form-inner form .field input:focus {
-      border-color: #fc83bb;
-      /* box-shadow: inset 0 0 3px #fb6aae; */
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.4);
     }
 
-    .form-inner form .field input::placeholder {
-      color: #999;
-      transition: all 0.3s ease;
+    .btn:active {
+      transform: translateY(0);
     }
 
-    form .field input:focus::placeholder {
-      color: #b3b3b3;
-    }
-
-    .form-inner form .pass-link {
-      margin-top: 5px;
-    }
-
-    .form-inner form .signup-link {
+    .signup-link {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 1.5rem;
+      color: #94a3b8;
+      font-size: 0.875rem;
     }
 
-    .form-inner form .pass-link a,
-    .form-inner form .signup-link a {
-      color: #fa4299;
+    .signup-link a {
+      color: #06b6d4;
       text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
     }
 
-    .form-inner form .pass-link a:hover,
-    .form-inner form .signup-link a:hover {
+    .signup-link a:hover {
+      color: #14b8a6;
       text-decoration: underline;
     }
 
-    form .btn {
-      height: 50px;
-      width: 100%;
-      border-radius: 5px;
-      position: relative;
-      overflow: hidden;
+    /* Fade in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    form .btn .btn-layer {
-      height: 100%;
-      width: 300%;
-      position: absolute;
-      left: -100%;
-      background: -webkit-linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299);
-      border-radius: 5px;
-      transition: all 0.4s ease;
-      ;
+    .wrapper {
+      animation: fadeIn 0.6s ease;
     }
 
-    form .btn:hover .btn-layer {
+    /* Popup Modal Styles */
+    .popup-modal {
+      display: none;
+      position: fixed;
+      top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
     }
 
-    form .btn input[type="submit"] {
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-      position: relative;
-      background: none;
-      border: none;
-      color: #fff;
-      padding-left: 0;
-      border-radius: 5px;
-      font-size: 20px;
-      font-weight: 500;
-      cursor: pointer;
+    .popup-modal.show {
+      display: flex;
     }
-    #option select{
-      width: inherit;
-      height: 35px;
+
+    .popup-content {
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      border: 2px solid rgba(148, 163, 184, 0.2);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(148, 163, 184, 0.2);
+      border: none;
+      color: #cbd5e1;
+      font-size: 2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      line-height: 1;
+    }
+
+    .popup-close:hover {
+      background: rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      transform: rotate(90deg);
+    }
+
+    .popup-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .popup-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #f1f5f9;
+    }
+
+    .popup-message {
+      color: #cbd5e1;
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
+
+    .popup-content.error {
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .popup-content.error .popup-title {
+      color: #ef4444;
+    }
+
+    .popup-content.success {
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+
+    .popup-content.success .popup-title {
+      color: #10b981;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
     }
   </style>
-  <link rel="icon" href="/favicon.ico" />
 </head>
 
 <body>
   <div class="wrapper">
-    <div class="title-text">
-      <div class="title login">Login</div>
-      <div class="title signup">Signup</div>
+    <div class="logo">
+      <div class="logo-icon">📝</div>
+      <div class="logo-text">Quiz App</div>
+      <div class="logo-subtitle">Test your knowledge</div>
     </div>
+
+    <div class="slide-controls">
+      <input type="radio" name="slide" id="login" checked>
+      <label for="login">Login</label>
+      <input type="radio" name="slide" id="signup">
+      <label for="signup">Signup</label>
+    </div>
+
     <div class="form-container">
-      <div class="slide-controls">
-        <input type="radio" name="slide" id="login" checked>
-        <input type="radio" name="slide" id="signup">
-        <label for="login" class="slide login">Login</label>
-        <label for="signup" class="slide signup">Signup</label>
-        <div class="slider-tab"></div>
-      </div>
       <div class="form-inner">
         <form action="login" class="login" method="post">
           <div class="field">
-            <input type="text" placeholder="Email Address" name="email" required>
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" name="email" required>
           </div>
           <div class="field">
-            <input type="password" placeholder="Password" name="password" required>
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" name="password" required>
           </div>
-          <div class="field" id="option">
-            <select name="page">
-              <option value="student" >Student</option>
-              <option value="faculty">Faculty</option>
-            </select>
+          <button type="submit" class="btn">Login</button>
+          <div class="signup-link">
+            Not a member? <a href="#" id="switch-to-signup">Signup now</a>
           </div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" id="submit" value="Login">
-          </div>
-          <div class="signup-link">Not a member? <a href="">Signup now</a></div>
         </form>
+
         <form action="signup" class="signup" method="post">
           <div class="field">
-            <input type="text" placeholder="Email Address" id="sign_up_email" name="email" required>
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" name="email" required>
           </div>
           <div class="field">
-            <input type="password" placeholder="Password" id="sign_up_password" name="password" required>
+            <label>Password</label>
+            <input type="password" placeholder="Create a password" name="password" required>
           </div>
           <div class="field">
-            <input type="password" placeholder="Confirm password" name="confirm_password" required>
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm your password" name="confirm_password" required>
           </div>
-          <div class="field" id="option">
-            <select name="page">
+          <div class="field">
+            <label>Role</label>
+            <select name="page" required>
               <option value="student">Student</option>
               <option value="faculty">Faculty</option>
             </select>
           </div>
-          <div class="field btn" >
-            <div class="btn-layer"></div>
-            <input type="submit" value="Signup" id="signup_submit">
+          <button type="submit" class="btn">Signup</button>
+          <div class="signup-link">
+            Already a member? <a href="#" id="switch-to-login">Login now</a>
           </div>
         </form>
       </div>
     </div>
   </div>
 
+  <!-- Popup Modal -->
+  <div id="popup-modal" class="popup-modal">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closePopup()">×</button>
+      <div class="popup-icon" id="popup-icon">⚠️</div>
+      <div class="popup-title" id="popup-title">Message</div>
+      <div class="popup-message" id="popup-message"></div>
+    </div>
+  </div>
+
   <script>
-    const baseUrl = 'http://localhost:8383/';
-    let email, password;
-    let gess;
-    const loginText = document.querySelector(".title-text .login");
-    const loginForm = document.querySelector("form.login");
-    const loginBtn = document.querySelector("label.login");
-    const signupBtn = document.querySelector("label.signup");
-    const signupLink = document.querySelector("form .signup-link a");
-    signupBtn.onclick = (() => {
-      loginForm.style.marginLeft = "-50%";
-      loginText.style.marginLeft = "-50%";
+    const loginRadio = document.getElementById('login');
+    const signupRadio = document.getElementById('signup');
+    const formInner = document.querySelector('.form-inner');
+    const switchToSignup = document.getElementById('switch-to-signup');
+    const switchToLogin = document.getElementById('switch-to-login');
+    const loginForm = document.querySelector('form.login');
+    const signupForm = document.querySelector('form.signup');
+
+    function showLogin() {
+      loginRadio.checked = true;
+      formInner.classList.remove('signup-active');
+    }
+
+    function showSignup() {
+      signupRadio.checked = true;
+      formInner.classList.add('signup-active');
+    }
+
+    loginRadio.addEventListener('change', showLogin);
+    signupRadio.addEventListener('change', showSignup);
+    
+    switchToSignup.addEventListener('click', (e) => {
+      e.preventDefault();
+      showSignup();
     });
-    loginBtn.onclick = (() => {
-      loginForm.style.marginLeft = "0%";
-      loginText.style.marginLeft = "0%";
+
+    switchToLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      showLogin();
     });
-    signupLink.onclick = (() => {
-      signupBtn.click();
-      return false;
+
+    // Popup functions
+    function showPopup(type, title, message) {
+      const modal = document.getElementById('popup-modal');
+      const content = modal.querySelector('.popup-content');
+      const icon = document.getElementById('popup-icon');
+      const titleEl = document.getElementById('popup-title');
+      const messageEl = document.getElementById('popup-message');
+
+      content.className = 'popup-content ' + type;
+      icon.textContent = type === 'error' ? '⚠️' : '✅';
+      titleEl.textContent = title;
+      messageEl.textContent = message;
+      modal.classList.add('show');
+    }
+
+    function closePopup() {
+      document.getElementById('popup-modal').classList.remove('show');
+    }
+
+    // Close popup on background click
+    document.getElementById('popup-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'popup-modal') {
+        closePopup();
+      }
+    });
+
+    // Handle login form submission
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = loginForm.querySelector('.btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+
+      try {
+        const formData = new FormData(loginForm);
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(formData))
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          window.location.href = result.redirectUrl;
+        } else {
+          showPopup('error', 'Login Failed', result.error);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Login';
+        }
+      } catch (error) {
+        showPopup('error', 'Error', 'Network error. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Login';
+      }
+    });
+
+    // Handle signup form submission
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = signupForm.querySelector('.btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account...';
+
+      try {
+        const formData = new FormData(signupForm);
+        const response = await fetch('/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(formData))
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          showPopup('success', 'Success!', result.message);
+          setTimeout(() => {
+            closePopup();
+            showLogin();
+            signupForm.reset();
+          }, 2000);
+        } else {
+          showPopup('error', 'Signup Failed', result.error);
+        }
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Signup';
+      } catch (error) {
+        showPopup('error', 'Error', 'Network error. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Signup';
+      }
     });
   </script>
-
 </body>
-
 </html>

@@ -33,6 +33,7 @@
         "description": "Faculty dashboard to create and manage quizzes in the Quiz Application."
     }
     </script>
+  <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="./favicon.ico" />
     <style>
         * {
@@ -53,8 +54,8 @@
 
         html,
         body {
-            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
-
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
+            min-height: 100vh;
         }
 
         a {
@@ -62,12 +63,13 @@
         }
 
         span {
-            background: #1e00ff;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
-            padding: 4px;
+            padding: 8px 16px;
             margin: 5px;
             border-radius: 12px;
-            font-size: 30px;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.3);
         }
 
         input,
@@ -85,7 +87,10 @@
 
         /* navbar */
         nav {
-            background-color: black;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         nav ul {
@@ -95,17 +100,23 @@
             justify-content: center;
         }
 
-        nav ul li a {
-            padding: 20px;
-            margin: 18px;
-            color: aqua;
-            border-radius: 12px;
+        nav ul li button {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: rgba(51, 65, 85, 0.8);
+            color: #cbd5e1;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        nav ul li a:hover {
-
-            background-color: white;
-            color: red;
+        nav ul li button:hover {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);
         }
 
         /* box */
@@ -133,10 +144,14 @@
             margin: 19px;
         }
 
-        button:active,
-        input:active {
-            background-color: black;
-            color: white;
+        button:active {
+            transform: translateY(0);
+        }
+        
+        input:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+            outline: none;
         }
 
         #Quiz {
@@ -147,24 +162,23 @@
         }
 
         #titlequiz{
-            background-color: red;
-            font-size: 30px;
+            font-size: 2rem;
             text-align: center;
-            padding: 6px;
-            width: 200px;
-            align-items: center;
-            justify-content: center;
-            margin: 20px auto;
-            border-radius: 12px;
-            text-decoration:underline;
-            text-decoration-color:red;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            font-weight: 700;
+            background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         #divof_CO div p{
             display: inline;
-            background: rgb(51, 46, 46);
-            padding: 9px;
-            font-size: larger;
-            border-radius: 7px;
+            background: rgba(30, 41, 59, 0.6);
+            padding: 12px 20px;
+            font-size: 1.125rem;
+            border-radius: 0.75rem;
+            border: 2px solid rgba(148, 163, 184, 0.2);
         }
     </style>
 
@@ -224,7 +238,7 @@
 </body>
 <script>
 
-    const baseUrl = process.env.FRONTEND_URL;
+    const baseUrl = window.location.origin + '/';
     const create = document.getElementById("Create")
     const update = document.getElementById("Update")
     const response = document.getElementById("Response")

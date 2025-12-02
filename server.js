@@ -14,7 +14,7 @@ const PASSWORD_KEY = Number(process.env.PASSWORD_KEY);
 // Example usage
 
 const { signup, login, valid } = require("./db")
-const { indexxx, kitteninfo, questionsss, answerfromstudent,responseinfo ,response,resultinfo} = require("./dbquiz")
+const { indexxx, kitteninfo, questionsss, answerfromstudent, responseinfo, response, resultinfo, getQuizTitlesForStudent, getQuizByTitle } = require("./dbquiz")
 
 const baseUrl = process.env.FRONTEND_URL;
 const goHomeBtn = `<br><br><br><button style="font-size:25px" onclick="window.location='${baseUrl}'">Click Here to go Home Page</button>`
@@ -197,6 +197,35 @@ app.get("/logined/:pagee/quizinfo", async (req, res) => {
         }
 
 })
+
+// New optimized endpoints for lazy loading
+app.get("/logined/student/quiztitles", async (req, res) => {
+    let page = await valid(req)
+    if (page == "student") {
+        const titles = await getQuizTitlesForStudent(req);
+        res.status(200).json(titles);
+    }
+    else {
+        res.status(404).send("<h1>your not access to the site</h1>" + goHomeBtn)
+    }
+})
+
+app.get("/logined/student/quiz/:title", async (req, res) => {
+    let page = await valid(req)
+    if (page == "student") {
+        const quiz = await getQuizByTitle(req);
+        
+        if (quiz.error) {
+            res.status(400).json(quiz);
+        } else {
+            res.status(200).json(quiz);
+        }
+    }
+    else {
+        res.status(404).send("<h1>your not access to the site</h1>" + goHomeBtn)
+    }
+})
+
 app.get("/logined/:pagee/update", async (req, res) => {
     if (req.cookies.token) {
         let page = await valid(req);
@@ -255,25 +284,36 @@ app.get("/logined/:pagee", async (req, res) => {
 })
 
 app.post("/login", async (req, res) => {
-    const sucess = await login(req.body, res);
-    if (sucess === true) {
-        //max age
-        res.status(200).send(`<script>window.location="/"</script>`)
+    const result = await login(req.body, res);
+    if (result.success === true) {
+        // Return JSON with redirect URL
+        res.status(200).json({
+            success: true,
+            redirectUrl: result.page === 'faculty' ? '/logined/faculty/create' : '/logined/student'
+        });
     }
     else {
-        res.status(404).send("<h1>" + sucess + "</h1>" + goHomeBtn);
+        // Return JSON with error message
+        res.status(401).json({
+            success: false,
+            error: result.error
+        });
     }
-
-
 })
 
 app.post("/signup", async (req, res) => {
-    const sucess = await signup(req.body);
-    if (sucess === true) {
-        res.status(200).send(`<script>window.location="/"</script>`)
+    const result = await signup(req.body);
+    if (result.success === true) {
+        res.status(200).json({
+            success: true,
+            message: "Account created successfully! Please login."
+        });
     }
     else {
-        res.status(404).send("<h1>" + sucess + "</h1>" + goHomeBtn);
+        res.status(400).json({
+            success: false,
+            error: result.error
+        });
     }
 })
 app.post("/logined/logout", async (req, res) => {

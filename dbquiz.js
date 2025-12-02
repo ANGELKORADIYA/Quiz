@@ -210,3 +210,74 @@ module.exports.resultinfo = async (req) => {
     }
     
 }
+
+// New optimized functions for lazy loading
+module.exports.getQuizTitlesForStudent = async (req) => {
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
+    let auth = await valid(req);
+    
+    if (auth === "student") {
+        let emaill = await email(req);
+        let ret = new Array;
+        
+        // Fetch only titles from faculty quizzes
+        let check = await quizmodel.find(
+            { page: "faculty" }, 
+            { title: true, _id: false }, 
+            { lean: true }
+        ).exec();
+        
+        // Filter out quizzes already taken by this student
+        for (let i = 0; i < check.length; i++) {
+            let alreadyTaken = await quizmodel.findOne({ 
+                page: "student", 
+                email: emaill,
+                title: check[i].title 
+            });
+            
+            if (!alreadyTaken) {
+                ret.push(check[i]);
+            }
+        }
+        
+        return ret;
+    }
+    
+    return [];
+}
+
+module.exports.getQuizByTitle = async (req) => {
+    await mongoose.connect(DBurl, { dbName: 'Quiz' })
+    let auth = await valid(req);
+    
+    if (auth === "student") {
+        let emaill = await email(req);
+        const { title } = req.params;
+        
+        // Check if student has already taken this quiz
+        let alreadyTaken = await quizmodel.findOne({ 
+            page: "student", 
+            email: emaill,
+            title: title 
+        });
+        
+        if (alreadyTaken) {
+            return { error: "Quiz already taken" };
+        }
+        
+        // Fetch full quiz data including questions
+        let quiz = await quizmodel.findOne(
+            { page: "faculty", title: title }, 
+            { title: true, _id: false, questions: true }, 
+            { lean: true }
+        ).exec();
+        
+        if (quiz) {
+            return quiz;
+        }
+        
+        return { error: "Quiz not found" };
+    }
+    
+    return { error: "Unauthorized" };
+}

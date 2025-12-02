@@ -32,19 +32,19 @@ module.exports.signup= async(signup_data)=>{
         if(check){
             console.log("There is existing email is there.")
 
-            return "There is existing email is there."
+            return {success: false, error: "An account with this email already exists"}
         }
         else{
        
         loginModel.create({email:signup_data.email,password:await bcrypt.hash(signup_data.password,PASSWORD_KEY),page:signup_data.page})
         console.log("Data is Uploaded")
-        return true;
+        return {success: true};
     }
     }
     
     else{        
 
-        return "password does not match"
+        return {success: false, error: "Passwords do not match"}
     }
 }
 module.exports.login= async(login_data,res)=>{
@@ -54,21 +54,17 @@ module.exports.login= async(login_data,res)=>{
     let check = await loginModel.findOne({email:login_data.email})
     if(check){
         if(await bcrypt.compare(login_data.password,check.password)){
-            if(login_data.page==check.page){
-                let token = jwt.sign({"email":check._id},secretKey)
-                res.cookie("token",token, { maxAge: 1000000, httpOnly: true });
-                return true
-            }
-            else{
-            return "Not Acess"
-        }
+            // Auto-detect user type from database instead of requiring it from form
+            let token = jwt.sign({"email":check._id},secretKey)
+            res.cookie("token",token, { maxAge: 1000000, httpOnly: true });
+            return {success: true, page: check.page} // Return user type
         }
         else{
-            return "email or password is wrong"
+            return {success: false, error: "Invalid password"}
         }
     }
     else{
-        return "no email found"
+        return {success: false, error: "No account found with this email"}
     }
     
 }

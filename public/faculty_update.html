@@ -120,7 +120,7 @@
 
         html,
         body {
-            background: -webkit-linear-gradient(left, rgb(204, 0, 255), #3d36c7);
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
 
         }
 
@@ -129,7 +129,7 @@
         }
 
         span {
-            background: #1e00ff;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             color: white;
             padding: 4px;
             margin: 5px;
@@ -152,7 +152,13 @@
 
         /* navbar */
         nav {
-            background-color: black;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav ul {
@@ -162,17 +168,27 @@
             justify-content: center;
         }
 
-        nav ul li a {
-            padding: 20px;
-            margin: 18px;
-            color: aqua;
-            border-radius: 12px;
+        nav ul li a,
+        nav ul li button {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: rgba(51, 65, 85, 0.8);
+            color: #cbd5e1;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        nav ul li a:hover {
-
-            background-color: white;
-            color: red;
+        nav ul li a:hover,
+        nav ul li button:hover {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);
         }
 
         /* box */
@@ -204,88 +220,164 @@
             color: white;
         }
 
-        /*  */
+        /* Quiz Content Area */
         #loadquestion {
-            margin: 12px;
-            padding: 12px;
+            margin-top: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
         }
 
-        #question {
-            margin: 40px;
-            padding: 30px;
+        .COindicator {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
         }
 
         .loadquestion {
-            margin: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: #f1f5f9;
+        }
+
+        .options {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            margin: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options:hover {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: #06b6d4;
+        }
+
+        .options input[type="radio"],
+        .options input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .options label {
+            flex: 1;
+            cursor: pointer;
+            color: #cbd5e1;
+            font-size: 1rem;
         }
 
         textarea {
-            margin: 50px;
-            width: 90%;
-            height: 50px;
+            width: 100%;
+            max-width: 100%;
+            min-height: 100px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-radius: 0.75rem;
+            color: #f1f5f9;
+            padding: 1rem;
+            font-size: 1rem;
+            margin: 1rem 0;
+            resize: vertical;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+
+        textarea:focus {
+            border-color: #06b6d4;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
         }
 
         #confirmation2 {
             display: none;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 1rem;
+            border: 2px solid rgba(148, 163, 184, 0.1);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #confirmation2 button,
+        #reset,
+        #final_submit {
+            padding: 1rem 2rem;
+            margin: 1rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #reset {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 2px solid #ef4444 !important;
+        }
+
+        #reset:hover {
+            background: #ef4444;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3);
+        }
+
+        #final_submit {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            border: 2px solid transparent !important;
+        }
+
+        #final_submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.4);
+        }
+
+        .addoption {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .addoption:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(20, 184, 166, 0.3);
         }
 
         hr {
-            /* size:12px; */
-            height: 3px;
-            background-color: black;
-            /* size: 122px; */
-        }
-
-        .COindicator {
-            margin: 20px;
-            font-size: 30px;
-            background-color: blue;
-            color: white;
-            padding: 12px;
-            border-radius: 12px;
-        }
-
-        .loadquestion {
-            border-radius: 7px;
-            margin: 30px;
-            background-color: orange;
-            padding: 10px;
-        }
-
-        textarea {
-            text-align: center;
-            padding-top: 12px;
-        }
-
-        /* .discliamer{
-    position: relative;
-    display: none;
-    padding: 12px;
-    left:42%;
-    bottom: 30px;
-    border-radius: 12px;
-    background-color: aliceblue;
-}   
-
-.discliamer::after{
-    position: absolute;
-    content: '^';
-    font-size: 30px;
-    left: 69px;
-    bottom: 30px;
-} */
-        .options {
-            background: rgb(200, 222, 205);
-
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            border-radius: 30px;
-            margin: 12px 40px;
-        }
-
-        .options input {
-            border-radius: 30px;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
+            margin: 2rem 0;
         }
 
         .discliamer {
@@ -330,8 +422,86 @@
         #submit {
             display: none;
         }
+
+        /* Quiz Selection Grid */
+        .quiz-selection {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .quiz-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.2);
+            border-color: #06b6d4;
+        }
+
+        .quiz-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quiz-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
     </style>
 
+    <link rel="stylesheet" href="/style.css">
     <title>Document</title>
     <link rel="icon" href="/favicon.ico" />
 </head>
@@ -408,7 +578,7 @@
 
 
         let titleselect;
-        const baseUrl = process.env.FRONTEND_URL;
+        const baseUrl = window.location.origin + '/';
         const create = document.getElementById("Create")
         const update = document.getElementById("Update")
         const response = document.getElementById("Response")
@@ -435,23 +605,34 @@
 
             })
             arrMain=arrMain[0];
-            dataofquestion.innerHTML+='<pre>    Your Quizzes in Data Base which is updated or you want structure question answer                </pre>'
+            
+            // Create quiz selection UI
+            dataofquestion.innerHTML = `
+                <div class="quiz-selection">
+                    <h1 class="page-title">Your Quizzes</h1>
+                    <p class="page-subtitle">Select a quiz to update</p>
+                    <div class="quiz-grid" id="quiz-grid"></div>
+                </div>
+            `;
+            
+            const quizGrid = document.getElementById('quiz-grid');
+            
             for (let i = 0; i < arrMain.length; i++) {
-                let line = `<button id="title_${i}">${arrMain[i].title}</button>`
-                dataofquestion.innerHTML+=line
-                
-                
-            }
-            dataofquestion.innerHTML+='<hr>'
-            for (let i = 0; i < arrMain.length; i++) {
-                let title=document.getElementById(`title_${i}`);
-                title.addEventListener("click",(e)=>{
+                const card = document.createElement('div');
+                card.className = 'quiz-card fade-in';
+                card.innerHTML = `
+                    <div class="quiz-card-icon">📝</div>
+                    <div class="quiz-card-title">${arrMain[i].title}</div>
+                `;
+                card.addEventListener("click", (e) => {
                     e.preventDefault();
-                    arr=arrMain[i].arr
-                    titleselect=i;
+                    arr = arrMain[i].arr;
+                    titleselect = i;
                     us();
-                })
+                });
+                quizGrid.appendChild(card);
             }
+            
             const ccenter = document.getElementById("loading")
             ccenter.style.display = "none";
         }
@@ -481,14 +662,14 @@
         function us() { 
             loadquestion.innerHTML="";
             for (let j = 0; j < arr.length; j++) {
-                loadquestion.innerHTML += `<div class="COindicator">for CO-${j + 1}</div>`
+                loadquestion.innerHTML += `<div class="COindicator">CO-${j + 1}</div>`
 
                 for (let i = 0; i < arr[j]; i++) {
                     loadquestion.innerHTML += `<div class="loadquestion">
         Question ${i + 1}:-
         <div>
         <textarea id="question-${j + 1}-${i + 1}" class="textarea" placeholder="Question title" name="question" required></textarea></div>
-        <button class="addoption" id="addbutton-${j + 1}-${i + 1}">add Options</button>
+        <button class="addoption" id="addbutton-${j + 1}-${i + 1}">Add Options</button>
         <div id="div-${j + 1}-${i + 1}"></div><div class="discliamer" id="a-${j}-${i}">Please Enter Value</div>
         </div>`;
 
@@ -654,8 +835,50 @@
                     addoption.addEventListener("click", (e) => {
                         e.preventDefault();
                         m = document.getElementById(`div-${j + 1}-${i + 1}`)
-                        m.innerHTML += `<div class="options"><input type="radio" id="radio-${j + 1}-${i + 1}-${x + 1}" name="${j + 1}-${i + 1}" required>
-                <label for="${j + 1}-${i + 1}-${x + 1}"><input type="text" id="option-${j + 1}-${i + 1}-${x + 1}" required></label></div>`
+                        
+                        // Create option container
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'options';
+                        optionDiv.id = `option-container-${j + 1}-${i + 1}-${x + 1}`;
+                        
+                        // Create radio input
+                        const radio = document.createElement('input');
+                        radio.type = 'radio';
+                        radio.id = `radio-${j + 1}-${i + 1}-${x + 1}`;
+                        radio.name = `${j + 1}-${i + 1}`;
+                        radio.required = true;
+                        
+                        // Create text input
+                        const textInput = document.createElement('input');
+                        textInput.type = 'text';
+                        textInput.id = `option-${j + 1}-${i + 1}-${x + 1}`;
+                        textInput.required = true;
+                        textInput.placeholder = `Option ${x + 1}`;
+                        
+                        // Create label
+                        const label = document.createElement('label');
+                        label.htmlFor = `${j + 1}-${i + 1}-${x + 1}`;
+                        label.appendChild(textInput);
+                        
+                        // Create delete button
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.textContent = '🗑️';
+                        deleteBtn.className = 'delete-option-btn';
+                        deleteBtn.type = 'button';
+                        deleteBtn.style.cssText = 'background: rgba(239, 68, 68, 0.2); border: 2px solid rgba(239, 68, 68, 0.5); color: #ef4444; padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; transition: all 0.3s ease;';
+                        deleteBtn.onmouseover = function() { this.style.background = 'rgba(239, 68, 68, 0.3)'; };
+                        deleteBtn.onmouseout = function() { this.style.background = 'rgba(239, 68, 68, 0.2)'; };
+                        deleteBtn.addEventListener('click', function() {
+                            optionDiv.remove();
+                            counter[j][i]--;
+                        });
+                        
+                        // Append elements
+                        optionDiv.appendChild(radio);
+                        optionDiv.appendChild(label);
+                        optionDiv.appendChild(deleteBtn);
+                        m.appendChild(optionDiv);
+                        
                         x++;
                         counter[j][i]++;
                     })
