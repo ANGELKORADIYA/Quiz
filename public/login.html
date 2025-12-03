@@ -47,7 +47,15 @@
     }
 
     html, body {
+      margin: 0;
+      padding: 0;
       height: 100%;
+      width: 100%;
+    }
+
+    /* Login Section - Main Container */
+    .login-section {
+      min-height: 100vh;
       width: 100%;
       display: flex;
       align-items: center;
@@ -55,11 +63,12 @@
       background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
       position: relative;
       overflow: hidden;
+      padding: 2rem 1rem;
     }
 
     /* Animated background circles */
-    body::before,
-    body::after {
+    .login-section::before,
+    .login-section::after {
       content: '';
       position: absolute;
       border-radius: 50%;
@@ -67,14 +76,14 @@
       animation: float 20s infinite ease-in-out;
     }
 
-    body::before {
+    .login-section::before {
       width: 500px;
       height: 500px;
       top: -250px;
       left: -250px;
     }
 
-    body::after {
+    .login-section::after {
       width: 400px;
       height: 400px;
       bottom: -200px;
@@ -92,7 +101,13 @@
       position: relative;
       z-index: 1;
       max-width: 450px;
-      width: 90%;
+      width: 100%;
+
+
+
+
+
+
       background: rgba(30, 41, 59, 0.8);
       backdrop-filter: blur(20px);
       padding: 3rem;
@@ -101,14 +116,30 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
-    .logo {
-      text-align: center;
+    /* Logo Header Section */
+    .logo-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
       margin-bottom: 2rem;
     }
 
     .logo-icon {
       font-size: 3.5rem;
-      margin-bottom: 0.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-header:hover .logo-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .logo-content {
+      text-align: left;
+      margin-right: 1rem;
     }
 
     .logo-text {
@@ -118,18 +149,24 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      margin-bottom: 0.25rem;
+      transition: all 0.3s ease;
     }
 
     .logo-subtitle {
       color: #94a3b8;
       font-size: 0.875rem;
-      margin-top: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    .logo-header:hover .logo-subtitle {
+      color: #cbd5e1;
     }
 
     .slide-controls {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       background: rgba(15, 23, 42, 0.5);
       padding: 0.5rem;
       border-radius: 0.75rem;
@@ -392,16 +429,139 @@
       cursor: not-allowed;
       transform: none !important;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .login-section {
+        padding: 1.5rem 1rem;
+      }
+
+      .login-section::before {
+        width: 350px;
+        height: 350px;
+        top: -175px;
+        left: -175px;
+      }
+
+      .login-section::after {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        right: -150px;
+      }
+
+      .wrapper {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+      }
+
+      .logo-header {
+        gap: 0.875rem;
+      }
+
+      .logo-icon {
+        font-size: 2.5rem;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+      }
+
+      .popup-content {
+        padding: 2rem;
+        max-width: 90%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-section {
+        padding: 1rem 0.75rem;
+      }
+
+      .login-section::before,
+      .login-section::after {
+        display: none; /* Hide animated circles on very small screens for better performance */
+      }
+
+      .wrapper {
+        padding: 1.5rem 1.25rem;
+        border-radius: 1rem;
+      }
+
+      .logo-header {
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .logo-icon {
+        font-size: 2rem;
+      }
+
+      .logo-text {
+        font-size: 1.25rem;
+      }
+
+      .logo-subtitle {
+        font-size: 0.75rem;
+      }
+
+      .logo-content {
+        margin-right: 0.5rem;
+      }
+
+      .slide-controls label {
+        padding: 0.625rem;
+        font-size: 0.875rem;
+      }
+
+      .field {
+        margin-bottom: 1.25rem;
+      }
+
+      .field label {
+        font-size: 0.8125rem;
+      }
+
+      .field input,
+      .field select {
+        padding: 0.75rem 0.875rem;
+        font-size: 0.9375rem;
+      }
+
+      .btn {
+        padding: 0.875rem;
+        font-size: 0.9375rem;
+      }
+
+      .popup-content {
+        padding: 1.5rem;
+      }
+
+      .popup-icon {
+        font-size: 3rem;
+      }
+
+      .popup-title {
+        font-size: 1.5rem;
+      }
+
+      .popup-message {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="logo">
-      <div class="logo-icon">📝</div>
-      <div class="logo-text">Quiz App</div>
-      <div class="logo-subtitle">Test your knowledge</div>
-    </div>
+  <section class="login-section">
+    <div class="wrapper">
+      <div class="logo-header">
+        <div class="logo-icon">📝</div>
+        <div class="logo-content">
+          <div class="logo-text">Quiz Master</div>
+          <div class="logo-subtitle">Test your knowledge</div>
+        </div>
+      </div>
 
     <div class="slide-controls">
       <input type="radio" name="slide" id="login" checked>
@@ -455,6 +615,7 @@
       </div>
     </div>
   </div>
+  </section>
 
   <!-- Popup Modal -->
   <div id="popup-modal" class="popup-modal">
